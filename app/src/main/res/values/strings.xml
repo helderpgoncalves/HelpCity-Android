@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">Help City</string>
+    <string name="app_name" translatable="false">Help City</string>
+    <string name="welcome">Welcome to the App</string>
 </resources>
