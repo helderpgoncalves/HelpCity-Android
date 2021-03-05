@@ -5,14 +5,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#fff"
+    android:background="#1E1D1D"
     tools:context=".SplashScreen">
 
     <ImageView
         android:id="@+id/SplashScreenImage"
         android:layout_width="400dp"
         android:layout_height="300dp"
-        android:src="@drawable/logo_transparent"
+        android:src="@drawable/logo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
