@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/home"
+        android:id="@+id/map"
         android:title="Map"
         android:icon="@drawable/ic_map" />
 
@@ -12,7 +12,7 @@
         android:icon="@drawable/ic_notes" />
 
     <item
-        android:id="@+id/personal_area"
-        android:title="Personal"
+        android:id="@+id/profile"
+        android:title="Profile"
         android:icon="@drawable/ic_profile" />
 </menu>
