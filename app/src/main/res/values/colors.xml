@@ -7,4 +7,7 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="cinza_escuro">#272727</color>
+    <color name="preto_background">#212121</color>
+    <color name="cor_do_logo">#1E1D1D</color>
 </resources>
