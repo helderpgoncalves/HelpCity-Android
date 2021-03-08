@@ -14,4 +14,11 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <style name="note_tile">
+        <item name="android:layout_marginBottom">8dp</item>
+        <item name="android:paddingLeft">8dp</item>
+        <item name="android:background">@color/cor_laranja</item>
+        <item name="android:textAppearance">@android:style/TextAppearance.Large</item>
+    </style>
+
 </resources>

@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="welcome">Bem-vindo à app</string>
+    <string name="delete_note">Eliminar Nota</string>
+    <string name="add_note">Adicionar Nota</string>
+    <string name="note">Nota</string>
 </resources>
