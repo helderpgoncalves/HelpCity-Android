@@ -20,7 +20,7 @@ class SplashScreen : AppCompatActivity() {
         //4second splash time
         Handler().postDelayed({
             //start main activity
-            startActivity(Intent(this@SplashScreen, NoteActivity::class.java))
+            startActivity(Intent(this@SplashScreen, MainActivity::class.java))
             //finish this activity
             finish()
         },4000)
