@@ -1,4 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="welcome">Bem-vindo à app</string>
+    <string name="delete_note">Eliminar Nota</string>
+    <string name="add_note">Adicionar Nota</string>
+    <string name="note">Nota</string>
+    <string name="hint_note">Nota...</string>
+    <string name="button_save">Guardar</string>
+    <string name="empty_not_saved">A nota não foi salva porque está vazia</string>
+    <string name="notes">Notas</string>
+    <string name="errorNote">Nota não criada</string>
+    <string name="title">Título</string>
+    <string name="description">Descrição</string>
+    <string name="create_note">Criar Nota</string>
+    <string name="new_note">Nova Nota</string>
+    <string name="map">Mapa</string>
+    <string name="settings">Definições</string>
+    <string name="profile">Perfil</string>
 </resources>

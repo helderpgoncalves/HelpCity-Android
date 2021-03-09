@@ -1,6 +1,19 @@
 <resources>
     <string name="app_name" translatable="false">Help City</string>
     <string name="welcome">Welcome to the App</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="add_note">Add Note</string>
+    <string name="delete_note">Delete Note</string>
+    <string name="note">Note</string>
+    <string name="hint_note">Note...</string>
+    <string name="button_save">Save</string>
+    <string name="empty_not_saved">Note not saved because it is empty</string>
+    <string name="notes">Notes</string>
+    <string name="errorNote">Note not created</string>
+    <string name="title">Title</string>
+    <string name="description">Description</string>
+    <string name="create_note">Create Note</string>
+    <string name="new_note">New Note</string>
+    <string name="map">Map</string>
+    <string name="settings">Settings</string>
+    <string name="profile">Profile</string>
 </resources>
