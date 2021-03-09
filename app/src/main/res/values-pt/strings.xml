@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="welcome">Bem-vindo à app</string>
-    <string name="delete_note">Eliminar Nota</string>
+    <string name="delete_note">Limpar tudo</string>
     <string name="add_note">Adicionar Nota</string>
     <string name="note">Nota</string>
     <string name="hint_note">Nota...</string>
@@ -16,4 +16,6 @@
     <string name="map">Mapa</string>
     <string name="settings">Definições</string>
     <string name="profile">Perfil</string>
+    <string name="delete_selected">Apagar Nota</string>
+    <string name="search_note">Procurar Nota</string>
 </resources>

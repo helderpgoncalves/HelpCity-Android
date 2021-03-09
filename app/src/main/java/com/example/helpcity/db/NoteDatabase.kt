@@ -23,15 +23,6 @@ abstract class NoteDatabase : RoomDatabase() {
                     scope.launch {
                         var noteDao = database.noteDao()
 
-                        // Insert
-                        var note = Note(1, "Nota 3", "Descricao")
-                        noteDao.insert(note)
-                        var note2 = Note(2, "Nota 2", "Descricao2")
-                        noteDao.insert(note2)
-
-                        var note3 = Note(3, "Nota 3", "Descricao3")
-                        noteDao.insert(note3)
-
                     }
                 }
             }
