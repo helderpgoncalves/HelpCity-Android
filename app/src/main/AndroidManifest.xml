@@ -15,13 +15,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.HelpCity">
+        <activity android:name=".MapActivity" />
         <activity
             android:name=".EditNoteActivity"
             android:parentActivityName=".NoteActivity"
             android:theme="@style/Theme.HelpCity.NoActionBar" />
         <activity
-            android:parentActivityName=".MainActivity"
             android:name=".NoteActivity"
+            android:parentActivityName=".MainActivity"
             android:theme="@style/Theme.HelpCity.NoActionBar" />
         <activity
             android:name=".NewNoteActivity"
@@ -36,7 +37,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity" />
+        <activity
+            android:name=".MainActivity"
+            android:theme="@style/Theme.HelpCity.NoActionBar" />
     </application>
 
 </manifest>

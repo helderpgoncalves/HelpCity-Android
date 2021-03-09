@@ -2,13 +2,11 @@ package com.example.helpcity
 
 import android.app.Activity
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
 import android.widget.Button
 import android.widget.EditText
-import android.widget.Toast
-import kotlinx.android.synthetic.main.recyclerview_note.*
+import androidx.appcompat.app.AppCompatActivity
 
 class NewNoteActivity : AppCompatActivity() {
 
