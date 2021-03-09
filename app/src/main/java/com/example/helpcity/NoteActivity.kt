@@ -1,11 +1,12 @@
 package com.example.helpcity
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,7 +15,6 @@ import com.example.helpcity.adapters.NoteListAdapter
 import com.example.helpcity.entities.Note
 import com.example.helpcity.viewModel.NoteViewModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import kotlinx.android.synthetic.main.recyclerview_note.*
 
 class NoteActivity : AppCompatActivity() {
 
@@ -32,47 +32,58 @@ class NoteActivity : AppCompatActivity() {
             setDisplayShowTitleEnabled(true)
         }
 
-            //Recycler view
-            val recyclerView = findViewById<RecyclerView>(R.id.recyclerNotes)
-            val adapter = NoteListAdapter(this)
-            recyclerView.adapter = adapter
-            recyclerView.layoutManager = LinearLayoutManager(this)
+        //Recycler view
+        val recyclerView = findViewById<RecyclerView>(R.id.recyclerNotes)
+        val adapter = NoteListAdapter(this)
+        recyclerView.adapter = adapter
+        recyclerView.layoutManager = LinearLayoutManager(this)
 
-            //View model
-            noteViewModel = ViewModelProvider(this).get(NoteViewModel::class.java)
-            noteViewModel.allNotes.observe(this, { notes ->
-                notes?.let { adapter.setNotes(it) }
-            })
+        //View model
+        noteViewModel = ViewModelProvider(this).get(NoteViewModel::class.java)
+        noteViewModel.allNotes.observe(this, { notes ->
+            notes?.let { adapter.setNotes(it) }
+        })
 
-            val fab = findViewById<FloatingActionButton>(R.id.notesFab)
-            fab.setOnClickListener {
-                val intent = Intent(this, NewNoteActivity::class.java)
-                startActivityForResult(intent, newNoteActivityRequestCode)
-            }
+        val fab = findViewById<FloatingActionButton>(R.id.notesFab)
+        fab.setOnClickListener {
+            val intent = Intent(this, NewNoteActivity::class.java)
+            startActivityForResult(intent, newNoteActivityRequestCode)
         }
-
-        override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-            super.onActivityResult(requestCode, resultCode, data)
-
-            if (requestCode == newNoteActivityRequestCode && resultCode == RESULT_OK) {
-                data?.getStringArrayExtra(NewNoteActivity.EXTRA_REPLY)?.let {
-                    val note = Note(noteTitle = it[0], noteDescription = it[1])
-                    noteViewModel.insert(note)
-                }
-            } else {
-                Toast.makeText(applicationContext, R.string.errorNote, Toast.LENGTH_SHORT).show()
-            }
-        }
-
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_note, menu)
-        return super.onCreateOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId){
-            R.id.nav_delete_selected -> Toast.makeText(this, "Delete Selected", Toast.LENGTH_SHORT).show()
+        return when (item.itemId){
+            R.id.nav_delete_all -> {
+                noteViewModel.deleteAll()
+                Toast.makeText(this, R.string.all_notes_cleared, Toast.LENGTH_SHORT).show()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
         }
-        return super.onOptionsItemSelected(item)
     }
-     }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == newNoteActivityRequestCode && resultCode == RESULT_OK) {
+            data?.getStringArrayExtra(NewNoteActivity.EXTRA_REPLY)?.let {
+                val note = Note(noteTitle = it[0], noteDescription = it[1])
+                noteViewModel.insert(note)
+            }
+        } else {
+            Toast.makeText(applicationContext, R.string.errorNote, Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_note, menu)
+
+        val search = menu?.findItem(R.id.search_note)
+        val searchView = search?.actionView as? SearchView
+        searchView?.isSubmitButtonEnabled = true
+
+        return true
+
+    }
+
+}

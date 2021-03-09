@@ -3,12 +3,14 @@ package com.example.helpcity.viewModel
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.asFlow
 import androidx.lifecycle.viewModelScope
 import com.example.helpcity.db.NoteDatabase
 import com.example.helpcity.db.NoteRepository
 import com.example.helpcity.entities.Note
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.util.concurrent.Flow
 
 class NoteViewModel(application: Application) : AndroidViewModel(application) {
     private val repository: NoteRepository
@@ -35,4 +37,9 @@ class NoteViewModel(application: Application) : AndroidViewModel(application) {
     fun deleteById(noteId: String) = viewModelScope.launch {
         repository.deleteById(noteId)
     }
+
+    fun deleteAll() = viewModelScope.launch {
+        repository.deleteAll()
+    }
+
 }

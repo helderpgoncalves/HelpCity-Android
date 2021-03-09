@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.helpcity.EditNoteActivity
 import com.example.helpcity.R
@@ -23,12 +24,21 @@ class NoteListAdapter internal constructor(
         val noteTitleView: TextView = itemView.findViewById(R.id.noteTitle)
         val noteDescriptionView: TextView = itemView.findViewById(R.id.noteDescription)
 
+        // Ir para a Nota Selecionada
         init {
             itemView.setOnClickListener { v: View ->
+                val position: Int = adapterPosition
                 val i = Intent(v.context, EditNoteActivity::class.java)
+                Toast.makeText(
+                    itemView.context,
+                    "Your clicked on item = ${position + 1}",
+                    Toast.LENGTH_SHORT
+                ).show()
                 v.context.startActivity(i)
             }
         }
+
+
     }
 
 
@@ -58,5 +68,4 @@ class NoteListAdapter internal constructor(
         const val noteTitle = "noteTitle"
         const val noteDescription = "noteDescription"
     }
-
 }

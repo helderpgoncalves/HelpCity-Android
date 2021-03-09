@@ -14,6 +14,10 @@ class MainActivity : AppCompatActivity() {
         notes_card_view.setOnClickListener{
             startActivity(Intent(this, NoteActivity::class.java))
         }
+
+        /*
+        TODO
+         */
     }
 
 
