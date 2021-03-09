@@ -57,6 +57,8 @@ class NoteActivity : AppCompatActivity() {
                     val note = Note(noteTitle = it[0], noteDescription = it[1])
                     noteViewModel.insert(note)
                 }
+            } else {
+                Toast.makeText(applicationContext, R.string.errorNote, Toast.LENGTH_SHORT).show()
             }
         }
     }

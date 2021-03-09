@@ -14,7 +14,6 @@ class NewNoteActivity : AppCompatActivity() {
 
     private lateinit var newNoteTitle: EditText
     private lateinit var newNoteDescription: EditText
-    private lateinit var newNoteTriggerButton: Button
 
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,10 +25,21 @@ class NewNoteActivity : AppCompatActivity() {
 
         newNoteTitle = findViewById(R.id.new_note_title)
         newNoteDescription = findViewById(R.id.new_note_description)
-        newNoteTriggerButton = findViewById(R.id.new_note_button)
+        val button = findViewById<Button>(R.id.new_note_button)
 
-        newNoteTriggerButton.setOnClickListener {
-            Toast.makeText(this, "Olá isto é um teste!", Toast.LENGTH_SHORT).show()
+        button.setOnClickListener {
+            val replyIntent = Intent()
+            if (TextUtils.isEmpty(newNoteTitle.text) || TextUtils.isEmpty(newNoteDescription.text)) {
+                setResult(Activity.RESULT_CANCELED, replyIntent)
+            } else {
+                val noteTitle = newNoteTitle.text.toString()
+                val noteDescription = newNoteDescription.text.toString()
+
+                replyIntent.putExtra(EXTRA_REPLY, arrayOf(noteTitle, noteDescription))
+
+                setResult(Activity.RESULT_OK, replyIntent)
+            }
+            finish()
         }
 
     }

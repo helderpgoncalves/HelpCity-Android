@@ -20,9 +20,13 @@
             android:parentActivityName=".NoteActivity"
             android:theme="@style/Theme.HelpCity.NoActionBar" />
         <activity
+            android:parentActivityName=".MainActivity"
             android:name=".NoteActivity"
             android:theme="@style/Theme.HelpCity.NoActionBar" />
-        <activity android:name=".NewNoteActivity" />
+        <activity
+            android:name=".NewNoteActivity"
+            android:parentActivityName=".NoteActivity"
+            android:theme="@style/Theme.HelpCity.NoActionBar" />
         <activity
             android:name=".SplashScreen"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">

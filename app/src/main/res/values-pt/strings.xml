@@ -8,9 +8,12 @@
     <string name="button_save">Guardar</string>
     <string name="empty_not_saved">A nota não foi salva porque está vazia</string>
     <string name="notes">Notas</string>
-    <string name="errorNote">Error ao criar uma nova nota</string>
+    <string name="errorNote">Nota não criada</string>
     <string name="title">Título</string>
     <string name="description">Descrição</string>
     <string name="create_note">Criar Nota</string>
     <string name="new_note">Nova Nota</string>
+    <string name="map">Mapa</string>
+    <string name="settings">Definições</string>
+    <string name="profile">Perfil</string>
 </resources>
