@@ -1,30 +1,38 @@
 package com.example.helpcity.viewModel
 
-import androidx.lifecycle.*
-import com.example.helpcity.entities.Note
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.viewModelScope
+import com.example.helpcity.db.NoteDatabase
 import com.example.helpcity.db.NoteRepository
+import com.example.helpcity.entities.Note
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class NoteViewModel(private val repository: NoteRepository) : ViewModel() {
+class NoteViewModel(application: Application) : AndroidViewModel(application) {
+    private val repository: NoteRepository
+    val allNotes: LiveData<List<Note>>
 
+    init {
+        val notesDao = NoteDatabase.getDatabase(application, viewModelScope).noteDao()
+        repository = NoteRepository(notesDao)
+        allNotes = repository.allNotes
+    }
 
-    val allWords: LiveData<List<Note>> = repository.allNotes.asLiveData()
-
-    /**
-     * Launching a new coroutine to insert the data in a non-blocking way
-     */
-    fun insert(note: Note) = viewModelScope.launch {
+    fun insert(note: Note) = viewModelScope.launch(Dispatchers.IO) {
         repository.insert(note)
     }
-}
 
-class WordViewModelFactory(private val repository: NoteRepository) : ViewModelProvider.Factory {
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(NoteViewModel::class.java)) {
-            @Suppress("UNCHECKED_CAST")
-            return NoteViewModel(repository) as T
+
+    // TODO
+
+    fun updateById(noteTitle: String, noteDescription: String, noteId: String) =
+        viewModelScope.launch {
+            repository.updateById(noteTitle, noteDescription, noteId)
         }
-        throw IllegalArgumentException("Unknown ViewModel class")
+
+    fun deleteById(noteId: String) = viewModelScope.launch {
+        repository.deleteById(noteId)
     }
 }
-

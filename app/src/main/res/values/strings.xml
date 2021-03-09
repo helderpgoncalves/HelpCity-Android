@@ -4,4 +4,13 @@
     <string name="add_note">Add Note</string>
     <string name="delete_note">Delete Note</string>
     <string name="note">Note</string>
+    <string name="hint_note">Note...</string>
+    <string name="button_save">Save</string>
+    <string name="empty_not_saved">Note not saved because it is empty</string>
+    <string name="notes">Notes</string>
+    <string name="errorNote">Error Creating new Note</string>
+    <string name="title">Title</string>
+    <string name="description">Description</string>
+    <string name="create_note">Create Note</string>
+    <string name="new_note">New Note</string>
 </resources>

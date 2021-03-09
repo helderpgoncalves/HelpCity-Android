@@ -4,4 +4,13 @@
     <string name="delete_note">Eliminar Nota</string>
     <string name="add_note">Adicionar Nota</string>
     <string name="note">Nota</string>
+    <string name="hint_note">Nota...</string>
+    <string name="button_save">Guardar</string>
+    <string name="empty_not_saved">A nota não foi salva porque está vazia</string>
+    <string name="notes">Notas</string>
+    <string name="errorNote">Error ao criar uma nova nota</string>
+    <string name="title">Título</string>
+    <string name="description">Descrição</string>
+    <string name="create_note">Criar Nota</string>
+    <string name="new_note">Nova Nota</string>
 </resources>
