@@ -2,15 +2,14 @@ package com.example.helpcity
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.SearchView
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.helpcity.adapters.NoteListAdapter
@@ -40,11 +39,24 @@ class NoteActivity : AppCompatActivity() {
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
 
+        val swipeToDeleteCallback = object : SwipeToDeleteCallback(this) {
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                val pos = viewHolder.adapterPosition
+                val list : List<Note> = adapter.getNotes()
+                noteViewModel.deleteNote(list[pos])
+                Toast.makeText(context, R.string.note_deleted, Toast.LENGTH_SHORT).show()
+                adapter.notifyItemRemoved(pos)
+            }
+        }
+
+        val itemTouchHelper = ItemTouchHelper(swipeToDeleteCallback)
+        itemTouchHelper.attachToRecyclerView(recyclerView)
+
         //View model
         noteViewModel = ViewModelProvider(this).get(NoteViewModel::class.java)
-        noteViewModel.allNotes.observe(this, { notes ->
-            notes?.let { adapter.setNotes(it) }
-        })
+        noteViewModel.allNotes.observe(this) { notes ->
+            notes.let { adapter.setNotes(it) }
+        }
 
         val fab = findViewById<FloatingActionButton>(R.id.notesFab)
         fab.setOnClickListener {
@@ -56,9 +68,20 @@ class NoteActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.nav_delete_all -> {
-                noteViewModel.deleteAll()
-                Toast.makeText(this, R.string.all_notes_cleared, Toast.LENGTH_SHORT).show()
+
+                val builder = AlertDialog.Builder(this)
+                builder.setPositiveButton(R.string.yes) { _, _ ->
+                    noteViewModel.deleteAll()
+                    Toast.makeText(this, R.string.all_notes_cleared, Toast.LENGTH_SHORT).show()
+                }
+
+                builder.setNegativeButton(R.string.no) { _, _ -> }
+                builder.setTitle(R.string.delete_everything)
+                builder.setMessage(R.string.delete_everything_confirmation)
+                builder.create().show()
+
                 true
+
             }
             else -> super.onOptionsItemSelected(item)
         }
@@ -119,7 +142,7 @@ class NoteActivity : AppCompatActivity() {
         //View model
         noteViewModel = ViewModelProvider(this).get(NoteViewModel::class.java)
         noteViewModel.searchForNotes(desc = searchText).observe(this) { notes ->
-            notes?.let { adapter.setNotes(it)}
+            notes.let { adapter.setNotes(it) }
         }
     }
 }

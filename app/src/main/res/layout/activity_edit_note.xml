@@ -4,37 +4,61 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/cinza_escuro"
     tools:context=".EditNoteActivity">
 
-    <ImageView
-        android:id="@+id/_noteDetail"
-        android:layout_width="0dp"
-        android:layout_height="200dp"
-        android:scaleType="centerCrop"
+    <TextView
+        android:id="@+id/_noteId"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        tools:ignore="MissingConstraints" />
+
+    <androidx.appcompat.widget.Toolbar
+        android:backgroundTint="@color/cor_laranja"
+        android:id="@+id/edit_note_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/cinza_escuro"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/avatars" />
+        app:titleTextColor="@color/white" />
+
+
+    <ImageView
+        android:id="@+id/_noteImage"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintTop_toBottomOf="@+id/edit_note_toolbar"
+        tools:layout_editor_absoluteX="0dp"
+        android:src="@mipmap/ic_launcher_round"
+        tools:srcCompat="@mipmap/ic_launcher_round" />
 
     <TextView
         android:id="@+id/_noteTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:textColor="@color/cor_laranja"
         android:text="TextView"
-        android:textSize="18sp"
+        android:textSize="42sp"
+        android:textAllCaps="true"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/_noteDetail" />
+        app:layout_constraintTop_toBottomOf="@+id/_noteImage" />
 
     <TextView
         android:id="@+id/_noteDesc"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+        android:textColor="@color/white"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
+        android:textSize="30sp"
         android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.11"

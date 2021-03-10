@@ -8,11 +8,11 @@
     tools:context=".NoteActivity">
 
     <androidx.appcompat.widget.Toolbar
-        android:backgroundTint="@color/cor_laranja"
         android:id="@+id/noteListToolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/cinza_escuro"
+        android:backgroundTint="@color/cor_laranja"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,10 +22,14 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerNotes"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:layout_width="411dp"
+        android:layout_height="672dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/noteListToolbar"
+        app:layout_constraintVertical_bias="0.39"
+        app:layout_goneMarginTop="50dp"
         tools:listitem="@layout/recyclerview_note" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

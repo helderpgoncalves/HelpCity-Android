@@ -5,6 +5,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.asFlow
 import androidx.lifecycle.viewModelScope
+import com.example.helpcity.adapters.NoteListAdapter.Companion.noteId
 import com.example.helpcity.db.NoteDatabase
 import com.example.helpcity.db.NoteRepository
 import com.example.helpcity.entities.Note
@@ -35,6 +36,18 @@ class NoteViewModel(application: Application) : AndroidViewModel(application) {
         repository.deleteById(noteId)
     }
 
+    fun deleteNote(note: Note) =  viewModelScope.launch(Dispatchers.IO){
+        repository.deleteNote(note)
+    }
+
+    fun getNoteByTitle(noteTitle: String) : Note {
+        return repository.getNoteByTitle(noteTitle)
+    }
+
+    suspend fun updateNote(note: Note) =  viewModelScope.launch(Dispatchers.IO){
+        repository.updateNote(note)
+    }
+
     fun deleteAll() = viewModelScope.launch {
         repository.deleteAll()
     }
@@ -42,5 +55,4 @@ class NoteViewModel(application: Application) : AndroidViewModel(application) {
     fun searchForNotes(desc: String) : LiveData<List<Note>> {
         return repository.search(desc)
     }
-
 }

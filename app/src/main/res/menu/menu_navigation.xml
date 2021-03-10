@@ -3,16 +3,16 @@
 
     <item
         android:id="@+id/map"
-        android:title="Map"
-        android:icon="@drawable/ic_map" />
+        android:icon="@drawable/ic_map"
+        android:title="Map" />
 
     <item
-        android:title="Notes"
         android:id="@+id/notes"
-        android:icon="@drawable/ic_notes" />
+        android:icon="@drawable/ic_notes"
+        android:title="Notes" />
 
     <item
         android:id="@+id/profile"
-        android:title="Profile"
-        android:icon="@drawable/ic_profile" />
+        android:icon="@drawable/ic_profile"
+        android:title="Profile" />
 </menu>

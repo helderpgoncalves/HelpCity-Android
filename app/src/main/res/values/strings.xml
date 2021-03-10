@@ -19,4 +19,9 @@
     <string name="profile">Profile</string>
     <string name="search_note">Search Note</string>
     <string name="all_notes_cleared">All notes have been cleared</string>
+    <string name="yes">Yes</string>
+    <string name="note_deleted">Note deleted</string>
+    <string name="no">No</string>
+    <string name="delete_everything">Delete all notes?</string>
+    <string name="delete_everything_confirmation">Are you sure you want to delete everything?</string>
 </resources>

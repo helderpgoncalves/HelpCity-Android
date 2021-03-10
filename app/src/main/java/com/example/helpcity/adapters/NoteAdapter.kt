@@ -6,16 +6,20 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ExpandableListView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.helpcity.EditNoteActivity
 import com.example.helpcity.R
 import com.example.helpcity.entities.Note
+import kotlin.coroutines.coroutineContext
 
 class NoteListAdapter internal constructor(
     context: Context
 ) : RecyclerView.Adapter<NoteListAdapter.NoteViewHolder>() {
+
     private val inflater: LayoutInflater = LayoutInflater.from(context)
     private var notes = emptyList<Note>()
 
@@ -27,20 +31,14 @@ class NoteListAdapter internal constructor(
         // Ir para a Nota Selecionada
         init {
             itemView.setOnClickListener { v: View ->
-                val position: Int = adapterPosition
                 val i = Intent(v.context, EditNoteActivity::class.java)
-                Toast.makeText(
-                    itemView.context,
-                    "Your clicked on item = ${position + 1}",
-                    Toast.LENGTH_SHORT
-                ).show()
+                i.putExtra("title", noteTitleView.text)
+                i.putExtra("description", noteDescriptionView.text)
+                i.putExtra("id", adapterPosition.toString())
                 v.context.startActivity(i)
             }
         }
-
-
     }
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoteViewHolder {
         val itemView = inflater.inflate(R.layout.recyclerview_note, parent, false)
@@ -58,6 +56,10 @@ class NoteListAdapter internal constructor(
     internal fun setNotes(notes: List<Note>) {
         this.notes = notes
         notifyDataSetChanged()
+    }
+
+    internal fun getNotes() : List<Note> {
+        return this.notes
     }
 
     override fun getItemCount() = notes.size
