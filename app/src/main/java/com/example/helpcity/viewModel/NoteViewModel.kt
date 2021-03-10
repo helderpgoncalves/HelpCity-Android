@@ -26,9 +26,6 @@ class NoteViewModel(application: Application) : AndroidViewModel(application) {
         repository.insert(note)
     }
 
-
-    // TODO
-
     fun updateById(noteTitle: String, noteDescription: String, noteId: String) =
         viewModelScope.launch {
             repository.updateById(noteTitle, noteDescription, noteId)
@@ -40,6 +37,10 @@ class NoteViewModel(application: Application) : AndroidViewModel(application) {
 
     fun deleteAll() = viewModelScope.launch {
         repository.deleteAll()
+    }
+
+    fun searchForNotes(desc: String) : LiveData<List<Note>> {
+        return repository.search(desc)
     }
 
 }

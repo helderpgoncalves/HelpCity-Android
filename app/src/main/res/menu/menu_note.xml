@@ -2,9 +2,10 @@
 <menu xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:id="@+id/search_note"
+    <item android:id="@+id/search_notes"
         android:icon="@drawable/ic_search"
         android:title="@string/search_note"
+        app:actionViewClass="androidx.appcompat.widget.SearchView"
         app:showAsAction="ifRoom" />
 
     <item android:id="@+id/nav_delete_selected"

@@ -8,6 +8,7 @@
     tools:context=".NoteActivity">
 
     <androidx.appcompat.widget.Toolbar
+        android:backgroundTint="@color/cor_laranja"
         android:id="@+id/noteListToolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"

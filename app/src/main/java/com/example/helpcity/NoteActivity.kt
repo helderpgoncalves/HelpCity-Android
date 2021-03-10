@@ -2,11 +2,13 @@ package com.example.helpcity
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -52,7 +54,7 @@ class NoteActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId){
+        return when (item.itemId) {
             R.id.nav_delete_all -> {
                 noteViewModel.deleteAll()
                 Toast.makeText(this, R.string.all_notes_cleared, Toast.LENGTH_SHORT).show()
@@ -78,12 +80,46 @@ class NoteActivity : AppCompatActivity() {
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_note, menu)
 
-        val search = menu?.findItem(R.id.search_note)
-        val searchView = search?.actionView as? SearchView
-        searchView?.isSubmitButtonEnabled = true
+        val search = menu!!.findItem(R.id.search_notes)
 
+
+        var searchView = search!!.actionView as androidx.appcompat.widget.SearchView
+
+        searchView = search.actionView as androidx.appcompat.widget.SearchView
+        searchView.isSubmitButtonEnabled = true
+        searchView.setOnQueryTextListener(object : androidx.appcompat.widget.
+        SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                if (query != null) {
+                    getNotesFromDB(query)
+                }
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                if (newText != null) {
+                    getNotesFromDB(newText)
+                }
+                return true
+            }
+        })
         return true
-
     }
 
+    private fun getNotesFromDB(searchText: String) {
+        var searchText = searchText
+        searchText = "%$searchText%"
+
+        val recyclerView = findViewById<RecyclerView>(R.id.recyclerNotes)
+
+        val adapter = NoteListAdapter(this)
+        recyclerView.adapter = adapter
+        recyclerView.layoutManager = LinearLayoutManager(this)
+
+        //View model
+        noteViewModel = ViewModelProvider(this).get(NoteViewModel::class.java)
+        noteViewModel.searchForNotes(desc = searchText).observe(this) { notes ->
+            notes?.let { adapter.setNotes(it)}
+        }
+    }
 }

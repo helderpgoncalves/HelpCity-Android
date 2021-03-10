@@ -27,4 +27,7 @@ interface NoteDao {
     @Query("DELETE FROM note WHERE noteId == :noteId")
     suspend fun deleteById(noteId: String)
 
+    @Query("Select * from note where noteDescription like  :desc OR noteTitle like :desc")
+    fun getSearchResults(desc : String) : LiveData<List<Note>>
+
 }
