@@ -59,15 +59,20 @@ class EditNoteActivity : AppCompatActivity() {
 
     private fun editNote() {
 
-        val noteId = intent.getStringExtra(NoteListAdapter.noteId)
-        // Log.e("WTF", noteId.toString());
+        if(editTitleTextView.text.toString().isEmpty() || editDescriptionTextView.text.toString().isEmpty()){
+            Toast.makeText(this, R.string.note_not_edited, Toast.LENGTH_SHORT).show()
+            finish()
+        } else {
+            val noteId = intent.getStringExtra(NoteListAdapter.noteId)
+            // Log.e("WTF", noteId.toString());
 
-        noteViewModel.updateById(
-            editTitleTextView.text.toString(),
-            editDescriptionTextView.text.toString(),
-            noteId.toString()
-        )
+            noteViewModel.updateById(
+                editTitleTextView.text.toString(),
+                editDescriptionTextView.text.toString(),
+                noteId.toString()
+            )
 
-        Toast.makeText(this, R.string.note_updated, Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, R.string.note_updated, Toast.LENGTH_SHORT).show()
+        }
     }
 }

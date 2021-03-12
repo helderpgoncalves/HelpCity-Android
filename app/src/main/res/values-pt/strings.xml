@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="welcome">Bem-vindo à app</string>
+    <string name="welcome">Bem-vindo de volta!</string>
     <string name="delete_note">Limpar tudo</string>
     <string name="add_note">Adicionar Nota</string>
     <string name="note">Nota</string>
@@ -25,4 +25,6 @@
     <string name="delete_everything_confirmation">Deseja apagar todas as suas notas?</string>
     <string name="note_deleted">Nota apagada</string>
     <string name="note_updated">Nota atualizada</string>
+    <string name="note_note_edited">Nota não editada</string>
+    <string name="note_not_edited">Nota não editada</string>
 </resources>
