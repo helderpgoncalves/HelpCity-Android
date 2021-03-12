@@ -1,9 +1,10 @@
 <resources>
     <string name="app_name" translatable="false">Help City</string>
-    <string name="welcome">Welcome to the App</string>
+    <string name="welcome">Welcome Back</string>
     <string name="add_note">Add Note</string>
     <string name="delete_note">Delete Note</string>
     <string name="delete_selected">Delete Selected</string>
+    <string name="note_not_edited">Note not edited</string>
     <string name="note">Note</string>
     <string name="hint_note">Note...</string>
     <string name="button_save">Save</string>

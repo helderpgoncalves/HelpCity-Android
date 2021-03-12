@@ -39,10 +39,11 @@ class NoteActivity : AppCompatActivity() {
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
 
+
         val swipeToDeleteCallback = object : SwipeToDeleteCallback(this) {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val pos = viewHolder.adapterPosition
-                val list : List<Note> = adapter.getNotes()
+                val list: List<Note> = adapter.getNotes()
                 noteViewModel.deleteNote(list[pos])
                 Toast.makeText(context, R.string.note_deleted, Toast.LENGTH_SHORT).show()
                 adapter.notifyItemRemoved(pos)
