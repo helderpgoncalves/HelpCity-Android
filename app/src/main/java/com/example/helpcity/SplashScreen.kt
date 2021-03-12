@@ -1,12 +1,11 @@
 package com.example.helpcity
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.view.Window
 import android.view.WindowManager
-import com.example.helpcity.entities.Note
+import androidx.appcompat.app.AppCompatActivity
 
 class SplashScreen : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -14,7 +13,10 @@ class SplashScreen : AppCompatActivity() {
         //hiding title bar of this activity
         window.requestFeature(Window.FEATURE_NO_TITLE)
         //making this activity full screen
-        window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
+        window.setFlags(
+            WindowManager.LayoutParams.FLAG_FULLSCREEN,
+            WindowManager.LayoutParams.FLAG_FULLSCREEN
+        )
         setContentView(R.layout.activity_splash_screen)
 
         //4second splash time
@@ -23,7 +25,7 @@ class SplashScreen : AppCompatActivity() {
             startActivity(Intent(this@SplashScreen, MainActivity::class.java))
             //finish this activity
             finish()
-        },4000)
+        }, 4000)
 
     }
 }

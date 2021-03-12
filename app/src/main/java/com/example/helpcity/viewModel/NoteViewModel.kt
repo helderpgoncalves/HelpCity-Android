@@ -3,12 +3,15 @@ package com.example.helpcity.viewModel
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.asFlow
 import androidx.lifecycle.viewModelScope
+import com.example.helpcity.adapters.NoteListAdapter.Companion.noteId
 import com.example.helpcity.db.NoteDatabase
 import com.example.helpcity.db.NoteRepository
 import com.example.helpcity.entities.Note
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.util.concurrent.Flow
 
 class NoteViewModel(application: Application) : AndroidViewModel(application) {
     private val repository: NoteRepository
@@ -24,15 +27,24 @@ class NoteViewModel(application: Application) : AndroidViewModel(application) {
         repository.insert(note)
     }
 
-
-    // TODO
-
     fun updateById(noteTitle: String, noteDescription: String, noteId: String) =
-        viewModelScope.launch {
+        viewModelScope.launch{
             repository.updateById(noteTitle, noteDescription, noteId)
         }
 
-    fun deleteById(noteId: String) = viewModelScope.launch {
-        repository.deleteById(noteId)
+    fun deleteNote(note: Note) =  viewModelScope.launch(Dispatchers.IO){
+        repository.deleteNote(note)
+    }
+
+    fun updateNote(note: Note) =  viewModelScope.launch(Dispatchers.IO){
+        repository.updateNote(note)
+    }
+
+    fun deleteAll() = viewModelScope.launch {
+        repository.deleteAll()
+    }
+
+    fun searchForNotes(desc: String) : LiveData<List<Note>> {
+        return repository.search(desc)
     }
 }

@@ -18,4 +18,11 @@
     <string name="profile">Perfil</string>
     <string name="delete_selected">Apagar Nota</string>
     <string name="search_note">Procurar Nota</string>
+    <string name="all_notes_cleared">Todas as notas foram apagadas.</string>
+    <string name="yes">Sim</string>
+    <string name="no">Não</string>
+    <string name="delete_everything">Apagar todas as notas?</string>
+    <string name="delete_everything_confirmation">Deseja apagar todas as suas notas?</string>
+    <string name="note_deleted">Nota apagada</string>
+    <string name="note_updated">Nota atualizada</string>
 </resources>

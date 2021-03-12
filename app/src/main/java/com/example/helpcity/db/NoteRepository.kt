@@ -14,11 +14,32 @@ class NoteRepository(private val noteDao: NoteDao) {
         noteDao.insert(note)
     }
 
-    suspend fun updateById(noteId: String, noteTitle: String, noteDescription: String) {
+    suspend fun updateById(noteTitle: String, noteDescription: String, noteId: String) {
         noteDao.updateById(noteTitle, noteDescription, noteId)
     }
 
     suspend fun deleteById(noteId: String) {
         noteDao.deleteById(noteId)
+    }
+
+    suspend fun deleteAll() {
+        noteDao.deleteAll()
+    }
+
+    fun deleteNote(note: Note) {
+        noteDao.deleteNote(note)
+    }
+
+    suspend fun updateNote(note: Note) {
+        noteDao.updateNote(note)
+    }
+
+    fun getNoteByTitle(title: String): Note {
+        return noteDao.getNoteByTitle(title)
+    }
+
+    @WorkerThread
+    fun search(desc: String): LiveData<List<Note>> {
+        return noteDao.getSearchResults(desc)
     }
 }

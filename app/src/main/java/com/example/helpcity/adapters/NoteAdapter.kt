@@ -15,6 +15,7 @@ import com.example.helpcity.entities.Note
 class NoteListAdapter internal constructor(
     context: Context
 ) : RecyclerView.Adapter<NoteListAdapter.NoteViewHolder>() {
+
     private val inflater: LayoutInflater = LayoutInflater.from(context)
     private var notes = emptyList<Note>()
 
@@ -23,14 +24,17 @@ class NoteListAdapter internal constructor(
         val noteTitleView: TextView = itemView.findViewById(R.id.noteTitle)
         val noteDescriptionView: TextView = itemView.findViewById(R.id.noteDescription)
 
+        // Ir para a Nota Selecionada
         init {
             itemView.setOnClickListener { v: View ->
                 val i = Intent(v.context, EditNoteActivity::class.java)
+                i.putExtra(noteTitle, noteTitleView.text)
+                i.putExtra(noteDescription, noteDescriptionView.text)
+                i.putExtra(noteId, noteIdView.text.toString())
                 v.context.startActivity(i)
             }
         }
     }
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoteViewHolder {
         val itemView = inflater.inflate(R.layout.recyclerview_note, parent, false)
@@ -50,6 +54,10 @@ class NoteListAdapter internal constructor(
         notifyDataSetChanged()
     }
 
+    internal fun getNotes(): List<Note> {
+        return this.notes
+    }
+
     override fun getItemCount() = notes.size
 
     companion object {
@@ -58,5 +66,4 @@ class NoteListAdapter internal constructor(
         const val noteTitle = "noteTitle"
         const val noteDescription = "noteDescription"
     }
-
 }

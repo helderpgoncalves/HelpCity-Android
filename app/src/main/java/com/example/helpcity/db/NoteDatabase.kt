@@ -15,18 +15,17 @@ abstract class NoteDatabase : RoomDatabase() {
 
     abstract fun noteDao(): NoteDao
 
-        private class NoteDatabaseCallback(private val scope: CoroutineScope) :
-            RoomDatabase.Callback() {
-            override fun onOpen(db: SupportSQLiteDatabase) {
-                super.onOpen(db)
-                INSTANCE?.let { database ->
-                    scope.launch {
-                        var noteDao = database.noteDao()
-
-                    }
+    private class NoteDatabaseCallback(private val scope: CoroutineScope) :
+        RoomDatabase.Callback() {
+        override fun onOpen(db: SupportSQLiteDatabase) {
+            super.onOpen(db)
+            INSTANCE?.let { database ->
+                scope.launch {
+                    var noteDao = database.noteDao()
                 }
             }
         }
+    }
 
     companion object {
         @Volatile

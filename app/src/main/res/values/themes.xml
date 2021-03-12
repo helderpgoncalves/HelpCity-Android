@@ -9,7 +9,7 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="note_tile">
+    <style name="note_title">
         <item name="android:layout_marginBottom">8dp</item>
         <item name="android:paddingLeft">8dp</item>
         <item name="android:textSize">32sp</item>
