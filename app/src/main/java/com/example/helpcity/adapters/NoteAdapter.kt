@@ -6,15 +6,11 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.ExpandableListView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.helpcity.EditNoteActivity
 import com.example.helpcity.R
 import com.example.helpcity.entities.Note
-import kotlin.coroutines.coroutineContext
 
 class NoteListAdapter internal constructor(
     context: Context
@@ -32,9 +28,9 @@ class NoteListAdapter internal constructor(
         init {
             itemView.setOnClickListener { v: View ->
                 val i = Intent(v.context, EditNoteActivity::class.java)
-                i.putExtra("title", noteTitleView.text)
-                i.putExtra("description", noteDescriptionView.text)
-                i.putExtra("id", adapterPosition.toString())
+                i.putExtra(noteTitle, noteTitleView.text)
+                i.putExtra(noteDescription, noteDescriptionView.text)
+                i.putExtra(noteId, noteIdView.text.toString())
                 v.context.startActivity(i)
             }
         }
@@ -58,7 +54,7 @@ class NoteListAdapter internal constructor(
         notifyDataSetChanged()
     }
 
-    internal fun getNotes() : List<Note> {
+    internal fun getNotes(): List<Note> {
         return this.notes
     }
 

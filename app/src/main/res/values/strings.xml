@@ -24,4 +24,5 @@
     <string name="no">No</string>
     <string name="delete_everything">Delete all notes?</string>
     <string name="delete_everything_confirmation">Are you sure you want to delete everything?</string>
+    <string name="note_updated">Note updated</string>
 </resources>

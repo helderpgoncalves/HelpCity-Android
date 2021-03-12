@@ -28,23 +28,15 @@ class NoteViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun updateById(noteTitle: String, noteDescription: String, noteId: String) =
-        viewModelScope.launch {
+        viewModelScope.launch{
             repository.updateById(noteTitle, noteDescription, noteId)
         }
-
-    fun deleteById(noteId: String) = viewModelScope.launch {
-        repository.deleteById(noteId)
-    }
 
     fun deleteNote(note: Note) =  viewModelScope.launch(Dispatchers.IO){
         repository.deleteNote(note)
     }
 
-    fun getNoteByTitle(noteTitle: String) : Note {
-        return repository.getNoteByTitle(noteTitle)
-    }
-
-    suspend fun updateNote(note: Note) =  viewModelScope.launch(Dispatchers.IO){
+    fun updateNote(note: Note) =  viewModelScope.launch(Dispatchers.IO){
         repository.updateNote(note)
     }
 

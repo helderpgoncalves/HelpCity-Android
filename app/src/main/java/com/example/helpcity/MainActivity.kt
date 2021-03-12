@@ -11,15 +11,15 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
 
-        notes_card_view.setOnClickListener{
+        notes_card_view.setOnClickListener {
             startActivity(Intent(this, NoteActivity::class.java))
         }
 
+        map_card_view.setOnClickListener {
+            startActivity(Intent(this, MapActivity::class.java))
+        }
         /*
         TODO
          */
     }
-
-
-
 }

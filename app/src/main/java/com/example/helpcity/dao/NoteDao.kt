@@ -26,11 +26,11 @@ interface NoteDao {
     suspend fun deleteAll()
 
     @Query("SELECT * FROM note WHERE noteTitle == :noteTitle")
-    fun getNoteByTitle(noteTitle: String) : Note
+    fun getNoteByTitle(noteTitle: String): Note
 
     @Query("DELETE FROM note WHERE noteId == :noteId")
     fun deleteById(noteId: String)
 
     @Query("Select * from note where noteDescription like  :desc OR noteTitle like :desc")
-    fun getSearchResults(desc : String) : LiveData<List<Note>>
+    fun getSearchResults(desc: String): LiveData<List<Note>>
 }

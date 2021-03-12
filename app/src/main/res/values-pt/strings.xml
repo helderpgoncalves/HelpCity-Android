@@ -24,4 +24,5 @@
     <string name="delete_everything">Apagar todas as notas?</string>
     <string name="delete_everything_confirmation">Deseja apagar todas as suas notas?</string>
     <string name="note_deleted">Nota apagada</string>
+    <string name="note_updated">Nota atualizada</string>
 </resources>
