@@ -27,4 +27,11 @@
     <string name="note_updated">Nota atualizada</string>
     <string name="note_note_edited">Nota não editada</string>
     <string name="note_not_edited">Nota não editada</string>
+    <string name="title_activity_map">Mapa</string>
+    <string name="normal_map">Mapa Normal</string>
+    <string name="hybrid_map">Mapa Híbrido</string>
+    <string name="satellite_map">Mapa Satélite</string>
+    <string name="terrain_map">Mapa do Terreno</string>
+    <string name="dropped_pin">Pin</string>
+    <string name="poi">POI</string>
 </resources>
