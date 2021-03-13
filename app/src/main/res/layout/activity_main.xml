@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/cinza_escuro"
     android:orientation="vertical"
     android:weightSum="7"
-    android:background="@color/cinza_escuro"
     tools:context=".MainActivity">
 
     <LinearLayout
@@ -16,8 +16,7 @@
         android:background="@drawable/header_bg"
         android:gravity="bottom"
         android:orientation="vertical"
-        android:padding="12dp"
-        >
+        android:padding="12dp">
 
         <TextView
             android:id="@+id/textGrid"
@@ -34,7 +33,7 @@
             android:layout_height="wrap_content"
             android:text="@string/welcome"
             android:textColor="@android:color/white"
-            android:textSize="25sp"/>
+            android:textSize="25sp" />
 
     </LinearLayout>
 
@@ -42,73 +41,77 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="6"
-        android:orientation="vertical"
         android:background="@color/cinza_escuro"
+        android:orientation="vertical"
         android:weightSum="2">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:weightSum="2"
-            android:padding="16dp">
+            android:padding="16dp"
+            android:weightSum="2">
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/map_card_view"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                app:cardElevation="2dp"
                 android:layout_marginRight="6dp"
+                android:layout_weight="1"
                 android:background="@color/black"
-                app:cardCornerRadius="8dp">
+                app:cardCornerRadius="8dp"
+                app:cardElevation="2dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:gravity="center"
                     android:background="@color/preto_background"
+                    android:gravity="center"
                     android:orientation="vertical">
+
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_baseline_map_24"/>
+                        android:src="@drawable/ic_baseline_map_24" />
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/map"
-                        android:textColor="@color/white"
-                        android:textAlignment="center"/>
+                        android:textAlignment="center"
+                        android:textColor="@color/white" />
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>
+
             <androidx.cardview.widget.CardView
                 android:id="@+id/notes_card_view"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                app:cardElevation="2dp"
                 android:layout_marginLeft="6dp"
+                android:layout_weight="1"
                 android:background="@color/black"
-                app:cardCornerRadius="8dp">
+                app:cardCornerRadius="8dp"
+                app:cardElevation="2dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="vertical"
                     android:background="@color/preto_background"
-                    android:gravity="center">
+                    android:gravity="center"
+                    android:orientation="vertical">
+
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_baseline_notes_24"/>
+                        android:src="@drawable/ic_baseline_notes_24" />
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/notes"
-                        android:textColor="@color/white"
-                        android:textAlignment="center"/>
+                        android:textAlignment="center"
+                        android:textColor="@color/white" />
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>
@@ -118,66 +121,71 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:weightSum="2"
-            android:padding="16dp">
+            android:padding="16dp"
+            android:weightSum="2">
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/profile_card_view"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                app:cardElevation="2dp"
                 android:layout_marginRight="6dp"
+                android:layout_weight="1"
                 android:background="@color/black"
-                app:cardCornerRadius="8dp">
+                app:cardCornerRadius="8dp"
+                app:cardElevation="2dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:gravity="center"
                     android:background="@color/preto_background"
+                    android:gravity="center"
                     android:orientation="vertical">
+
                     <ImageView
+                        android:id="@+id/icon_profile"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_baseline_person_24"/>
+                        android:src="@drawable/ic_baseline_person_24" />
 
                     <TextView
+                        android:id="@+id/login_logout_text"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/white"
-                        android:text="@string/profile"
-                        android:textAlignment="center"/>
+                        android:text="@string/login"
+                        android:textAlignment="center"
+                        android:textColor="@color/white" />
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>
+
             <androidx.cardview.widget.CardView
                 android:id="@+id/settings_card_view"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                app:cardElevation="2dp"
                 android:layout_marginLeft="6dp"
+                android:layout_weight="1"
                 android:background="@color/black"
-                app:cardCornerRadius="8dp">
+                app:cardCornerRadius="8dp"
+                app:cardElevation="2dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="vertical"
                     android:background="@color/preto_background"
-                    android:gravity="center">
+                    android:gravity="center"
+                    android:orientation="vertical">
+
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_baseline_settings_24"/>
+                        android:src="@drawable/ic_baseline_settings_24" />
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/settings"
-                        android:textColor="@color/white"
-                        android:textAlignment="center"/>
+                        android:textAlignment="center"
+                        android:textColor="@color/white" />
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>

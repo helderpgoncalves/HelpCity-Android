@@ -33,4 +33,13 @@
     <string name="lat_long_snippet" translatable="false">Lat: %1$.5f, Long: %2$.5f</string>
     <string name="dropped_pin">Dropped Pin</string>
     <string name="poi">POI</string>
+    <string name="email" translatable="false">Email</string>
+    <string name="password" translatable="false">Password</string>
+    <string name="forget_password">Forgot Password?</string>
+    <string name="insert_all_data">Please insert all data</string>
+    <string name="login">Login</string>
+    <string name="logout">Logout</string>
+    <string name="login_validation">Please enter your email and password</string>
+    <string name="login_success">Successful Login</string>
+    <string name="logout_success">Successful Logout</string>
 </resources>

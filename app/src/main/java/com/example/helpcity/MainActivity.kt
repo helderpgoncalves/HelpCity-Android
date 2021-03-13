@@ -10,6 +10,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        setupLoginOrLogoutButton()
 
         notes_card_view.setOnClickListener {
             startActivity(Intent(this, NoteActivity::class.java))
@@ -18,8 +19,20 @@ class MainActivity : AppCompatActivity() {
         map_card_view.setOnClickListener {
             startActivity(Intent(this, MapActivity::class.java))
         }
-        /*
-        TODO
-         */
+
+        profile_card_view.setOnClickListener {
+            startActivity(Intent(this, LoginActivity::class.java))
+        }
+    }
+
+    private fun setupLoginOrLogoutButton() {
+        if (AppPreferences.isLogin) {
+            welcome.text = AppPreferences.email // TODO
+            icon_profile!!.setImageResource(R.drawable.ic_baseline_exit_to_app_24)
+            login_logout_text!!.setText(R.string.logout)
+        } else {
+            icon_profile!!.setImageResource(R.drawable.ic_baseline_person_24)
+            login_logout_text!!.setText(R.string.login)
+        }
     }
 }
