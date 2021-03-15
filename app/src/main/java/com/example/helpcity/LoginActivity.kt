@@ -1,7 +1,6 @@
 package com.example.helpcity
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.widget.Toast
@@ -60,14 +59,17 @@ class LoginActivity : AppCompatActivity() {
         call.enqueue(object : Callback<User> {
             override fun onResponse(call: Call<User>, response: Response<User>) {
                 if (response.isSuccessful) {
-                    val user: User = response.body()!!
-                    Log.e("WTF", user.name)
-                    Log.e("WTF", user.password)
-                    Log.e("WTF", user.toString())
+
+                    val user = response.body()!!
+                    Toast.makeText(this@LoginActivity, R.string.login_success, Toast.LENGTH_SHORT)
+                        .show()
                     AppPreferences.isLogin = true
-                    AppPreferences.email = email
+                    AppPreferences.email = user.email
                     AppPreferences.username = user.name
                     AppPreferences.password = password
+                    AppPreferences.id = user.id
+
+                    setupLoginLayout()
                 }
             }
 

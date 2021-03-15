@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupLoginOrLogoutButton() {
         if (AppPreferences.isLogin) {
-            welcome.text = AppPreferences.email // TODO
+            welcome.text = AppPreferences.username
             icon_profile!!.setImageResource(R.drawable.ic_baseline_exit_to_app_24)
             login_logout_text!!.setText(R.string.logout)
         } else {
