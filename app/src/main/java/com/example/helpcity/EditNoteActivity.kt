@@ -59,7 +59,9 @@ class EditNoteActivity : AppCompatActivity() {
 
     private fun editNote() {
 
-        if(editTitleTextView.text.toString().isEmpty() || editDescriptionTextView.text.toString().isEmpty()){
+        if (editTitleTextView.text.toString().isEmpty() || editDescriptionTextView.text.toString()
+                .isEmpty()
+        ) {
             Toast.makeText(this, R.string.note_not_edited, Toast.LENGTH_SHORT).show()
             finish()
         } else {
