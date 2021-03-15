@@ -1,14 +1,19 @@
 package com.example.helpcity
 
 import android.Manifest
-import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.example.helpcity.api.EndPoints
+import com.example.helpcity.api.Occurrence
+import com.example.helpcity.api.ServiceBuilder
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -16,6 +21,9 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.util.*
 
 
@@ -26,32 +34,59 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var map: GoogleMap
     private val TAG = MapActivity::class.java.simpleName
     private val REQUEST_LOCATION_PERMISSION = 1
+    private lateinit var occurrences: List<Occurrence>
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_map)
+
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
+
+        // Location
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+
+        // Call the service
+        val request = ServiceBuilder.buildService(EndPoints::class.java)
+        val call = request.getOccurrences()
+        var position: LatLng
+
+        call.enqueue(object : Callback<List<Occurrence>> {
+            override fun onResponse(
+                call: Call<List<Occurrence>>,
+                response: Response<List<Occurrence>>
+            ) {
+                if (response.isSuccessful) {
+                    occurrences = response.body()!!
+                    for (occurrence in occurrences) {
+                        position = LatLng(occurrence.lat.toDouble(), occurrence.lng.toDouble())
+                        map.addMarker(
+                            MarkerOptions().position(position).title(occurrence.type).snippet(
+                                occurrence.description
+                            )
+                        )
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<List<Occurrence>>, t: Throwable) {
+                Toast.makeText(this@MapActivity, t.message, Toast.LENGTH_LONG).show()
+            }
+        })
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
         map = googleMap
 
-        //These coordinates represent the lattitude and longitude of the Googleplex.
-        val latitude = 37.422160
-        val longitude = -122.084270
-        val zoomLevel = 15f
-
-        val homeLatLng = LatLng(latitude, longitude)
-        map.moveCamera(CameraUpdateFactory.newLatLngZoom(homeLatLng, zoomLevel))
-        map.addMarker(MarkerOptions().position(homeLatLng))
-
-
-        setMapLongClick(map)
-        setPoiClick(map)
         enableMyLocation()
+
+
+        //    setMapLongClick(map)
+        //    setPoiClick(map)
     }
 
     // Initializes contents of Activity's standard options menu. Only called the first time options
@@ -120,17 +155,28 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
         ) == PackageManager.PERMISSION_GRANTED
     }
 
-    // Checks if users have given their location and sets location enabled if so.
-    @SuppressLint("MissingPermission")
-    private fun enableMyLocation() {
-        if (isPermissionGranted()) {
-            map.isMyLocationEnabled = true
-        } else {
+    fun enableMyLocation() {
+        if (ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+
             ActivityCompat.requestPermissions(
                 this,
-                arrayOf<String>(Manifest.permission.ACCESS_FINE_LOCATION),
+                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
                 REQUEST_LOCATION_PERMISSION
             )
+            return
+        } else {
+            map.isMyLocationEnabled = true
+
+            fusedLocationClient.lastLocation.addOnSuccessListener(this) { location ->
+                if (location != null) {
+                    val currentLatLng = LatLng(location.latitude, location.longitude)
+                    map.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 12f))
+                }
+            }
         }
     }
 

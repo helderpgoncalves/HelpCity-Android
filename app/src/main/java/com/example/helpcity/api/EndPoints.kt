@@ -4,10 +4,17 @@ import retrofit2.Call
 import retrofit2.http.*
 
 interface EndPoints {
-    @GET("/users/")
+
+    @GET("occurrences")
+    fun getOccurrences(): Call<List<Occurrence>>
+
+    @GET("occurrence/{1}")
+    fun getUserOccurrences(@Path("user_id") userId: String): Call<List<Occurrence>>
+
+    @GET("users/")
     fun getUsers(): Call<List<User>>
 
-    @GET("/users/{id}")
+    @GET("users/{id}")
     fun getUserById(@Path("id") id: Int): Call<User>
 
     @FormUrlEncoded
