@@ -43,4 +43,14 @@
     <string name="login_success">Successful Login</string>
     <string name="logout_success">Successful Logout</string>
     <string name="new_occurrence">New Occurrence</string>
+    <string name="add_occurrence">Add Occurrence</string>
+    <string name="type">Type</string>
+    <string name="uploadImages">Set your image</string>
+    <string name="msg_loading">Loading...</string>
+    <string name="buffering_string" translatable="false">Buffering&#8230;</string>
+    <string name="toast_message" translatable="false">Playback completed.</string>
+    <string name="pick_file">Pick file</string>
+    <string name="upload_file">Upload file</string>
+    <string name="toast_pick_file_error">Unable to pick file. Check status of file manager.</string>
+    <string name="remove_or_change">Remove/Change Image</string>
 </resources>

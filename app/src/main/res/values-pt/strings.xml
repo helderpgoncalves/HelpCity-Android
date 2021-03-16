@@ -40,4 +40,12 @@
     <string name="login_success">Login efetuado sucesso!</string>
     <string name="logout_success">Logout efetuado com sucesso!</string>
     <string name="new_occurrence">Nova ocorrência</string>
+    <string name="add_occurrence">Adicionar Ocorrência</string>
+    <string name="type">Tipo</string>
+    <string name="msg_loading">A carregar...</string>
+    <string name="pick_file">Escolhe um ficheiro</string>
+    <string name="upload_file">Carregue um ficheiro</string>
+    <string name="toast_pick_file_error">Erro ao escolher o ficheiro</string>
+    <string name="uploadImages">Escolhe a tua imagem</string>
+    <string name="remove_or_change">Remover/Alterar Imagem</string>
 </resources>
