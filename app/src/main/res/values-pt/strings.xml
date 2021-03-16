@@ -39,4 +39,5 @@
     <string name="login_validation">Por favor preencha todos os campos</string>
     <string name="login_success">Login efetuado sucesso!</string>
     <string name="logout_success">Logout efetuado com sucesso!</string>
+    <string name="new_occurrence">Nova ocorrência</string>
 </resources>

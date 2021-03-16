@@ -42,4 +42,5 @@
     <string name="login_validation">Please enter your email and password</string>
     <string name="login_success">Successful Login</string>
     <string name="logout_success">Successful Logout</string>
+    <string name="new_occurrence">New Occurrence</string>
 </resources>
