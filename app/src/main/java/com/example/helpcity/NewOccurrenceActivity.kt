@@ -8,8 +8,10 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.setPadding
 import com.afollestad.materialdialogs.MaterialDialog
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_new_occurrence.*
@@ -26,6 +28,7 @@ open class NewOccurrenceActivity : AppCompatActivity() {
     private lateinit var pDialog: ProgressDialog
     private var postPath: String? = null
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_new_occurrence)
@@ -39,11 +42,36 @@ open class NewOccurrenceActivity : AppCompatActivity() {
             setTitle(R.string.new_occurrence)
         }
 
+        // On Pick Image Button
         pickImage.setOnClickListener {
             uploadImage()
         }
 
         initDialog()
+    }
+
+    // Este metodo gera um diaolog com 3 opções e retorna um resultado
+    private fun uploadImage() {
+        MaterialDialog.Builder(this)
+            .title(R.string.uploadImages)
+            .items(R.array.uploadImages)
+            .itemsIds(R.array.itemIds)
+            .itemsCallback { _, _, which, _ ->
+                when (which) {
+                    0 -> {
+                        val galleryIntent = Intent(
+                            Intent.ACTION_PICK,
+                            MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+                        )
+                        startActivityForResult(galleryIntent, REQUEST_PICK_PHOTO)
+                    }
+                    1 -> captureImage()
+                    2 -> {
+                        preview.setImageResource(R.drawable.ic_baseline_image_24)
+                    }
+                }
+            }
+            .show()
     }
 
     private fun initDialog() {
@@ -74,12 +102,13 @@ open class NewOccurrenceActivity : AppCompatActivity() {
                     preview.setImageBitmap(BitmapFactory.decodeFile(mediaPath))
                     cursor.close()
 
+                    preview.setPadding(0)
                     pickImage.setText(R.string.remove_or_change)
 
+
                     postPath = mediaPath
+                    Log.d("HELDER", postPath.toString())
                 }
-
-
             } else if (requestCode == CAMERA_PIC_REQUEST) {
                 if (Build.VERSION.SDK_INT > 21) {
 
@@ -118,35 +147,17 @@ open class NewOccurrenceActivity : AppCompatActivity() {
         fileUri = savedInstanceState.getParcelable("file_uri")
     }
 
-    // Este metodo gera um diaolog com 3 opções e retorna um resultado
-    private fun uploadImage() {
-        MaterialDialog.Builder(this)
-            .title(R.string.uploadImages)
-            .items(R.array.uploadImages)
-            .itemsIds(R.array.itemIds)
-            .itemsCallback { _, _, which, _ ->
-                when (which) {
-                    0 -> {
-                        val galleryIntent = Intent(
-                            Intent.ACTION_PICK,
-                            MediaStore.Images.Media.EXTERNAL_CONTENT_URI
-                        )
-                        startActivityForResult(galleryIntent, REQUEST_PICK_PHOTO)
-                    }
-                    1 -> captureImage()
-                    2 -> preview.setImageResource(R.drawable.ic_baseline_image_24)
-                }
-            }
-            .show()
-    }
-
     // ATRAVÉS DA CAMERA DO TELEMOVEL
     private fun captureImage() {
-        /*
+        Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { takePictureIntent ->
+            takePictureIntent.resolveActivity(packageManager)?.also {
+                startActivityForResult(takePictureIntent, CAMERA_PIC_REQUEST)
 
-        TODO
-
-         */
+                /*
+                TODO
+                 */
+            }
+        }
     }
 
     companion object {
@@ -154,7 +165,7 @@ open class NewOccurrenceActivity : AppCompatActivity() {
         private val REQUEST_PICK_PHOTO = 2
         private val CAMERA_PIC_REQUEST = 1111
 
-        private val TAG = NewOccurrenceActivity::class.java.getSimpleName()
+        private val TAG = NewOccurrenceActivity::class.java.simpleName
     }
 
 }

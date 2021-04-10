@@ -2,6 +2,7 @@ package com.example.helpcity
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -17,7 +18,11 @@ class MainActivity : AppCompatActivity() {
         }
 
         map_card_view.setOnClickListener {
-            startActivity(Intent(this, MapActivity::class.java))
+            if(AppPreferences.isLogin){
+                startActivity(Intent(this, MapActivity::class.java))
+            } else {
+                Toast.makeText(this@MainActivity, R.string.loginToGoMap, Toast.LENGTH_SHORT).show()
+            }
         }
 
         profile_card_view.setOnClickListener {

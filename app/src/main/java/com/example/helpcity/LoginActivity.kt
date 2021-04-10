@@ -1,5 +1,6 @@
 package com.example.helpcity
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View.GONE
 import android.view.View.VISIBLE
@@ -69,12 +70,13 @@ class LoginActivity : AppCompatActivity() {
                     AppPreferences.password = password
                     AppPreferences.id = user.id
 
-                    setupLoginLayout()
+                    val intent = Intent(this@LoginActivity, MapActivity::class.java)
+                    startActivity(intent)
                 }
             }
 
             override fun onFailure(call: Call<User>, t: Throwable) {
-                Toast.makeText(this@LoginActivity, t.message, Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@LoginActivity, R.string.errorLogin, Toast.LENGTH_SHORT).show()
                 AppPreferences.isLogin = false
                 AppPreferences.email = ""
                 AppPreferences.password = ""
@@ -83,3 +85,4 @@ class LoginActivity : AppCompatActivity() {
         })
     }
 }
+

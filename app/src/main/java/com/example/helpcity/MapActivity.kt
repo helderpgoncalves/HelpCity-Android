@@ -43,10 +43,30 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var occurrences: List<Occurrence>
 
     // animation
-    private val rotateOpen: Animation by lazy {AnimationUtils.loadAnimation(this, R.anim.rotate_open_anim)}
-    private val rotateClose: Animation by lazy {AnimationUtils.loadAnimation(this, R.anim.rotate_close_anim)}
-    private val toBottom: Animation by lazy {AnimationUtils.loadAnimation(this, R.anim.from_bottom_anim)}
-    private val fromBottom: Animation by lazy {AnimationUtils.loadAnimation(this, R.anim.to_bottom_anim)}
+    private val rotateOpen: Animation by lazy {
+        AnimationUtils.loadAnimation(
+            this,
+            R.anim.rotate_open_anim
+        )
+    }
+    private val rotateClose: Animation by lazy {
+        AnimationUtils.loadAnimation(
+            this,
+            R.anim.rotate_close_anim
+        )
+    }
+    private val toBottom: Animation by lazy {
+        AnimationUtils.loadAnimation(
+            this,
+            R.anim.from_bottom_anim
+        )
+    }
+    private val fromBottom: Animation by lazy {
+        AnimationUtils.loadAnimation(
+            this,
+            R.anim.to_bottom_anim
+        )
+    }
     private var clicked = false
 
     // last know location
@@ -224,15 +244,15 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
         fusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, null)
     }
 
-    private fun occurrenceFabClicked(){
+    private fun occurrenceFabClicked() {
         setVisibility(clicked)
         setAnimation(clicked)
         setClickable(clicked)
         clicked = !clicked // se era true passa a false e vice versa :D
     }
 
-    private fun setVisibility(clicked: Boolean){
-        if(clicked){
+    private fun setVisibility(clicked: Boolean) {
+        if (clicked) {
             new_occurrenceFab.visibility = View.VISIBLE
             list_occurrenceFab.visibility = View.VISIBLE
         } else {
@@ -241,8 +261,8 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
         }
     }
 
-    private fun setAnimation(clicked : Boolean){
-        if(clicked){
+    private fun setAnimation(clicked: Boolean) {
+        if (clicked) {
             new_occurrenceFab.startAnimation(fromBottom)
             list_occurrenceFab.startAnimation(fromBottom)
             _occurrenceFab.startAnimation(rotateOpen)
@@ -253,8 +273,8 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
         }
     }
 
-    private fun setClickable(clicked: Boolean){
-        if(clicked){
+    private fun setClickable(clicked: Boolean) {
+        if (clicked) {
             new_occurrenceFab.isClickable = false
             list_occurrenceFab.isClickable = false
         } else {

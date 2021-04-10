@@ -87,4 +87,7 @@ dependencies {
     // images upload
     implementation 'com.afollestad.material-dialogs:core:0.9.4.5'
     implementation 'com.github.bumptech.glide:glide:3.8.0'
+
+    //Spinner
+    implementation "com.github.skydoves:powerspinner:1.1.7"
 }

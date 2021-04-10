@@ -48,4 +48,6 @@
     <string name="toast_pick_file_error">Erro ao escolher o ficheiro</string>
     <string name="uploadImages">Escolhe a tua imagem</string>
     <string name="remove_or_change">Remover/Alterar Imagem</string>
+    <string name="errorLogin">Erro ao efetuar o Login</string>
+    <string name="loginToGoMap">Login necessário para navegar para o Mapa</string>
 </resources>

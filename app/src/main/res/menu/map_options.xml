@@ -4,9 +4,9 @@
 
     <item
         android:id="@+id/marker_filters"
-        app:showAsAction="ifRoom"
         android:icon="@drawable/ic_baseline_filter_list_24"
-        android:title="TODO" />
+        android:title="TODO"
+        app:showAsAction="ifRoom" />
     <!-- TODO -->
     <item
         android:id="@+id/normal_map"
