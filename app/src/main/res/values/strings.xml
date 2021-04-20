@@ -49,10 +49,20 @@
     <string name="msg_loading">Loading...</string>
     <string name="buffering_string" translatable="false">Buffering&#8230;</string>
     <string name="toast_message" translatable="false">Playback completed.</string>
-    <string name="pick_file">Pick file</string>
+    <string name="pick_image">Pick Image</string>
     <string name="upload_file">Upload file</string>
     <string name="toast_pick_file_error">Unable to pick file. Check status of file manager.</string>
     <string name="remove_or_change">Remove/Change Image</string>
     <string name="errorLogin">Error doing the Login</string>
     <string name="loginToGoMap">You must have to login to navigate to the Map Section</string>
+    <string name="blankFields">Please submit the blank fields</string>
+    <string name="occurrence_create_success">Occurrence Created with Success</string>
+    <string name="occurrence_create_error">Error creating occurrence</string>
+    <string name="search">Search</string>
+    <string name="canceled">Operation cancelled!</string>
+    <string name="cancel">Cancel</string>
+    <string name="filter_occorrences">Filter Occurrences</string>
+    <string name="type_occurrence">Type of Occurrence</string>
+    <string name="traffic">Traffic</string>
+    <string name="distance_from_you">Distance</string>
 </resources>

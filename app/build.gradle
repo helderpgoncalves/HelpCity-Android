@@ -90,4 +90,5 @@ dependencies {
 
     //Spinner
     implementation "com.github.skydoves:powerspinner:1.1.7"
+
 }

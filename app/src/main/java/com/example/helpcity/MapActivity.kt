@@ -3,6 +3,7 @@ package com.example.helpcity
 import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Bundle
@@ -26,6 +27,7 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.android.synthetic.main.activity_map.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -41,6 +43,8 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
     private val TAG = MapActivity::class.java.simpleName
     private val REQUEST_LOCATION_PERMISSION = 1
     private lateinit var occurrences: List<Occurrence>
+
+    private lateinit var materialAlertDialogBuilder: MaterialAlertDialogBuilder
 
     // animation
     private val rotateOpen: Animation by lazy {
@@ -87,6 +91,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
+
         // initialize the fusedLocationClient
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
 
@@ -120,7 +125,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
                         position = LatLng(occurrence.lat.toDouble(), occurrence.lng.toDouble())
                         map.addMarker(
                             MarkerOptions().position(position).title(occurrence.type).snippet(
-                                occurrence.description
+                                occurrence.description // TODO
                             )
                         )
                     }
@@ -192,6 +197,10 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
     // Called whenever an item in your options menu is selected.
     override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
         // Change the map type based on the user's selection.
+        R.id.marker_filters -> {
+            showFilterDialog()
+            true
+        }
         R.id.normal_map -> {
             map.mapType = GoogleMap.MAP_TYPE_NORMAL
             true
@@ -282,5 +291,9 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
             list_occurrenceFab.isClickable = false
         }
     }
-}
 
+    private fun showFilterDialog() {
+        // Building the Alert dialog using materialAlertDialogBuilder instance
+        materialAlertDialogBuilder.setView(R.layout.layout_filter).show()
+    }
+}

@@ -18,6 +18,17 @@ interface EndPoints {
     fun getUserById(@Path("id") id: Int): Call<User>
 
     @FormUrlEncoded
+    @POST("occurrence-new")
+    fun newOccurrence(
+        @Field("type") type: String,
+        @Field("description") description: String,
+        @Field("image") image: String,
+        @Field("lat") lat: String,
+        @Field("lng") lng: String,
+        @Field("user_id") user_id: Int
+    ): Call<ServerResponse>
+
+    @FormUrlEncoded
     @POST("login")
     fun userLogin(
         @Field("email") email: String,
