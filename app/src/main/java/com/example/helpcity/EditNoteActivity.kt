@@ -23,7 +23,6 @@ class EditNoteActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit_note)
 
-
         noteViewModel = ViewModelProvider(this).get(NoteViewModel::class.java)
 
         setSupportActionBar(findViewById(R.id.edit_note_toolbar))

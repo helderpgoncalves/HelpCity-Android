@@ -39,4 +39,25 @@
     <string name="login_validation">Por favor preencha todos os campos</string>
     <string name="login_success">Login efetuado sucesso!</string>
     <string name="logout_success">Logout efetuado com sucesso!</string>
+    <string name="new_occurrence">Nova ocorrência</string>
+    <string name="add_occurrence">Adicionar Ocorrência</string>
+    <string name="type">Tipo</string>
+    <string name="msg_loading">A carregar...</string>
+    <string name="upload_file">Carregue um ficheiro</string>
+    <string name="toast_pick_file_error">Erro ao escolher o ficheiro</string>
+    <string name="uploadImages">Escolhe a tua imagem</string>
+    <string name="remove_or_change">Remover/Alterar Imagem</string>
+    <string name="errorLogin">Erro ao efetuar o Login</string>
+    <string name="loginToGoMap">Login necessário para navegar para o Mapa</string>
+    <string name="blankFields">Existem campos por preencher!</string>
+    <string name="pick_image">Carregar Imagem</string>
+    <string name="occurrence_create_error">Erro ao criar uma nova ocorrência!</string>
+    <string name="occurrence_create_success">Ocorrência criada com sucesso!</string>
+    <string name="cancel">Cancelar</string>
+    <string name="search">Procurar</string>
+    <string name="canceled">Operação Cancelada</string>
+    <string name="filter_occorrences">Filtrar Occorências</string>
+    <string name="type_occurrence">Tipo de Ocorrência</string>
+    <string name="traffic">Trânsito</string>
+    <string name="distance_from_you">Distância</string>
 </resources>

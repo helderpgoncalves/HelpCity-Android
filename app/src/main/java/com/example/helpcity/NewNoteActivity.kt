@@ -19,12 +19,19 @@ class NewNoteActivity : AppCompatActivity() {
 
         //Toolbar
         setSupportActionBar(findViewById(R.id.new_note_toolbar))
-        supportActionBar?.setTitle(R.string.new_note)
+        supportActionBar?.apply {
+            setDisplayHomeAsUpEnabled(true)
+            setDisplayShowHomeEnabled(true)
+            setDisplayShowTitleEnabled(true)
+            setTitle(R.string.new_note)
+        }
+
 
         newNoteTitle = findViewById(R.id.new_note_title)
         newNoteDescription = findViewById(R.id.new_note_description)
         val button = findViewById<Button>(R.id.new_note_button)
 
+        // SUBMIT NEW NOTE
         button.setOnClickListener {
             val replyIntent = Intent()
             if (TextUtils.isEmpty(newNoteTitle.text) || TextUtils.isEmpty(newNoteDescription.text)) {
