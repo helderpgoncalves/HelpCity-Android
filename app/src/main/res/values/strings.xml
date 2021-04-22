@@ -65,4 +65,6 @@
     <string name="type_occurrence">Type of Occurrence</string>
     <string name="traffic">Traffic</string>
     <string name="distance_from_you">Distance</string>
+    <string name="range_of">Range of</string>
+    <string name="meters">Meters</string>
 </resources>

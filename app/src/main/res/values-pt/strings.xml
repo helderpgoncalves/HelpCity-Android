@@ -60,4 +60,6 @@
     <string name="type_occurrence">Tipo de Ocorrência</string>
     <string name="traffic">Trânsito</string>
     <string name="distance_from_you">Distância</string>
+    <string name="range_of">Área de</string>
+    <string name="meters">Metros</string>
 </resources>

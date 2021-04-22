@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/marker_filters"
+        android:id="@+id/type_filter"
         android:icon="@drawable/ic_baseline_filter_list_24"
         android:title="TODO"
         app:showAsAction="ifRoom" />

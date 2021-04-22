@@ -3,7 +3,6 @@ package com.example.helpcity
 import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Bundle
@@ -14,6 +13,7 @@ import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -25,14 +25,13 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.gms.maps.model.*
+import com.google.android.material.slider.Slider
 import kotlinx.android.synthetic.main.activity_map.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.util.*
+import kotlin.math.roundToInt
 
 
 //This class allows you to interact with the map by adding markers, styling its appearance and
@@ -43,8 +42,10 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
     private val TAG = MapActivity::class.java.simpleName
     private val REQUEST_LOCATION_PERMISSION = 1
     private lateinit var occurrences: List<Occurrence>
+    private lateinit var markers: ArrayList<Marker>
 
-    private lateinit var materialAlertDialogBuilder: MaterialAlertDialogBuilder
+    // HashMap para Ligar cada Marker ao seu Type de modo a ser mais fácil filtrar
+    private lateinit var markersTypeHashMap: HashMap<Marker, String>
 
     // animation
     private val rotateOpen: Animation by lazy {
@@ -71,6 +72,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
             R.anim.to_bottom_anim
         )
     }
+
     private var clicked = false
 
     // last know location
@@ -101,41 +103,34 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
                 super.onLocationResult(p0)
                 lastLocation = p0.lastLocation
                 val loc = LatLng(lastLocation.latitude, lastLocation.longitude)
-                map.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, 15.0f)) // Follow me option
+                map.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, 14.3f)) // Follow me option
                 // TODO
             }
+        }
+
+        continuousSlider.addOnChangeListener(Slider.OnChangeListener { slider, _, _ ->
+          /*  Log.d(
+                "addOnChangeListener",
+                slider.value.toString()
+            )
+
+           */
+
+            filterByDistance(lastLocation, markers, slider.value.roundToInt())
+
+        })
+        continuousSlider.setLabelFormatter { value: Float ->
+            val nomeAntesDoSlider = resources.getString(R.string.range_of)
+            val nomeMetros = resources.getString(R.string.meters)
+            return@setLabelFormatter nomeAntesDoSlider.plus(" ${value.roundToInt()} ")
+                .plus(nomeMetros)
         }
 
         // update location
         createLocationRequest()
 
-        // Call the service
-        val request = ServiceBuilder.buildService(EndPoints::class.java)
-        val call = request.getOccurrences()
-        var position: LatLng
 
-        call.enqueue(object : Callback<List<Occurrence>> {
-            override fun onResponse(
-                call: Call<List<Occurrence>>,
-                response: Response<List<Occurrence>>
-            ) {
-                if (response.isSuccessful) {
-                    occurrences = response.body()!!
-                    for (occurrence in occurrences) {
-                        position = LatLng(occurrence.lat.toDouble(), occurrence.lng.toDouble())
-                        map.addMarker(
-                            MarkerOptions().position(position).title(occurrence.type).snippet(
-                                occurrence.description // TODO
-                            )
-                        )
-                    }
-                }
-            }
-
-            override fun onFailure(call: Call<List<Occurrence>>, t: Throwable) {
-                Toast.makeText(this@MapActivity, t.message, Toast.LENGTH_LONG).show()
-            }
-        })
+        getAllOccurrences()
 
         // Ir para a Atividade de Criar novas Ocorrencias
         _occurrenceFab.setOnClickListener {
@@ -146,6 +141,58 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
             val i = Intent(this, NewOccurrenceActivity::class.java)
             startActivity(i)
         }
+    }
+
+    private fun getAllOccurrences() {
+        // Call the service
+        val request = ServiceBuilder.buildService(EndPoints::class.java)
+        val call = request.getOccurrences()
+
+        call.enqueue(object : Callback<List<Occurrence>> {
+            override fun onResponse(
+                call: Call<List<Occurrence>>,
+                response: Response<List<Occurrence>>
+            ) {
+
+                markers = ArrayList()
+                markersTypeHashMap = HashMap()
+
+                if (response.isSuccessful) {
+
+                    occurrences = response.body()!!
+
+                    for (occurrence in occurrences) {
+
+                        /*
+                        TODO
+                        METER OS MARKERS COM IMAGEM
+
+                        // Creates Bitmap objects from various sources, including files, streams, and byte-arrays.
+                        // https://developer.android.com/reference/kotlin/android/graphics/BitmapFactory
+
+                        var imagemWeb =
+                            "https://helpcity.000webhostapp.com/uploads/" + occurrence.image
+                        var input: InputStream = URL(imagemWeb).openStream()
+                        var imagemFinalBitmap = BitmapFactory.decodeStream(input)
+                         */
+
+                        var position = LatLng(occurrence.lat.toDouble(), occurrence.lng.toDouble())
+
+                        val marker: Marker = map.addMarker(
+                            MarkerOptions().position(position).title(occurrence.type)
+                                .snippet(occurrence.description)
+                        )
+
+                        markers.add(marker) // Adiciona-mos ao nosso ArrayList para mais tarde conseguirmos mexer nela e fazer o que pretendemos
+                        markersTypeHashMap[marker] = occurrence.type
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<List<Occurrence>>, t: Throwable) {
+                Toast.makeText(this@MapActivity, t.message, Toast.LENGTH_LONG).show()
+            }
+        })
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
@@ -197,8 +244,8 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
     // Called whenever an item in your options menu is selected.
     override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
         // Change the map type based on the user's selection.
-        R.id.marker_filters -> {
-            showFilterDialog()
+        R.id.type_filter -> {
+            openDialogType()
             true
         }
         R.id.normal_map -> {
@@ -292,8 +339,77 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
         }
     }
 
-    private fun showFilterDialog() {
-        // Building the Alert dialog using materialAlertDialogBuilder instance
-        materialAlertDialogBuilder.setView(R.layout.layout_filter).show()
+    private fun filterByType(type: String) {
+
+        Toast.makeText(this, type, Toast.LENGTH_LONG).show()
+
+        for (marker in markers) {
+            marker.isVisible = markersTypeHashMap[marker] == type
+        }
+    }
+
+    private fun filterByDistance(location: Location, markers: ArrayList<Marker>, range: Int) {
+        for (marker in markers) {
+            var distanceWidth = FloatArray(1)
+
+            //calculate the distance between left <-> right of map on screen
+            Location.distanceBetween(
+                location.latitude,
+                location.longitude,
+                marker.position.latitude,
+                marker.position.longitude,
+                distanceWidth
+            )
+            marker.isVisible = distanceWidth[0] < range
+        }
+    }
+
+    private fun openDialogType() {
+        val builder = AlertDialog.Builder(this)
+        //set title for alert dialog
+        builder.setTitle(R.string.filter_occorrences)
+
+
+        builder.setItems(R.array.Filter_types) { _, which ->
+            when (which) {
+                0 -> {
+                    filterByType("Traffic")
+                }
+                1 -> {
+                    filterByType("Accident")
+                }
+                2 -> {
+                    filterByType("Construction")
+                }
+                3 -> {
+                    filterByType("Protest")
+                }
+                4 -> {
+                    filterByType("Other")
+                }
+                5 -> {
+                    showAllMarkers()
+                }
+            }
+        }
+
+        builder.setIcon(android.R.drawable.ic_menu_mapmode)
+
+        //performing cancel action
+        builder.setNeutralButton(R.string.cancel) { _, _ ->
+            Toast.makeText(applicationContext, R.string.canceled, Toast.LENGTH_LONG).show()
+        }
+
+        // Create the AlertDialog
+        val alertDialog: AlertDialog = builder.create()
+        // Set other dialog properties
+        alertDialog.setCancelable(false)
+        alertDialog.show()
+    }
+
+    private fun showAllMarkers() {
+        for (marker in markers) {
+            marker.isVisible = true
+        }
     }
 }
