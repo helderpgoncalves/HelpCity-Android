@@ -22,7 +22,10 @@
         android:theme="@style/Theme.HelpCity"
         android:usesCleartextTraffic="true"
         tools:targetApi="n">
-
+        <activity
+            android:name=".OccurrenceActivity"
+            android:parentActivityName=".MapActivity"
+            android:theme="@style/Theme.HelpCity.NoActionBar" />
         <activity
             android:name=".NewOccurrenceActivity"
             android:parentActivityName=".MapActivity"

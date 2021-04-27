@@ -8,8 +8,14 @@ interface EndPoints {
     @GET("occurrences")
     fun getOccurrences(): Call<List<Occurrence>>
 
-    @GET("occurrence/{1}")
+    @GET("occurrences-user/{user_id}")
     fun getUserOccurrences(@Path("user_id") userId: String): Call<List<Occurrence>>
+
+    @POST("/occurrence/delete-all/user/{user_id}")
+    fun deleteAllUserOccurrences(@Path("user_id") userId: String): Call<ServerResponse>
+
+    @POST("occurrence-delete/{id}")
+    fun deleteOccurrenceById(@Path("id") occurrenceId: String): Call<ServerResponse>
 
     @GET("users/")
     fun getUsers(): Call<List<User>>

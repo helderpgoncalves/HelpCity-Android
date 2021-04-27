@@ -63,7 +63,7 @@
         android:layout_marginBottom="20dp"
         app:thumbColor="@color/cor_laranja"
         app:tickColor="@color/cinza_escuro"
-        android:value="100.0"
+        android:value="800.0"
         android:valueFrom="100"
         android:valueTo="1500"
         app:layout_constraintBottom_toBottomOf="@+id/map"

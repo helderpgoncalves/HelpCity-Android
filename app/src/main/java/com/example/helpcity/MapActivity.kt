@@ -109,14 +109,9 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
         }
 
         continuousSlider.addOnChangeListener(Slider.OnChangeListener { slider, _, _ ->
-          /*  Log.d(
-                "addOnChangeListener",
-                slider.value.toString()
-            )
-
-           */
-
-            filterByDistance(lastLocation, markers, slider.value.roundToInt())
+            if (markers.isNotEmpty()) {
+                filterByDistance(lastLocation, markers, slider.value.roundToInt())
+            }
 
         })
         continuousSlider.setLabelFormatter { value: Float ->
@@ -141,6 +136,11 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
             val i = Intent(this, NewOccurrenceActivity::class.java)
             startActivity(i)
         }
+
+        list_occurrenceFab.setOnClickListener {
+            val i = Intent(this, OccurrenceActivity::class.java)
+            startActivity(i)
+        }
     }
 
     private fun getAllOccurrences() {
@@ -157,7 +157,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
                 markers = ArrayList()
                 markersTypeHashMap = HashMap()
 
-                if (response.isSuccessful) {
+                if (response.body() != null) {
 
                     occurrences = response.body()!!
 
@@ -186,6 +186,8 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
                         markers.add(marker) // Adiciona-mos ao nosso ArrayList para mais tarde conseguirmos mexer nela e fazer o que pretendemos
                         markersTypeHashMap[marker] = occurrence.type
                     }
+                } else {
+                    markers.clear()
                 }
             }
 
@@ -335,7 +337,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
             list_occurrenceFab.isClickable = false
         } else {
             new_occurrenceFab.isClickable = true
-            list_occurrenceFab.isClickable = false
+            list_occurrenceFab.isClickable = true
         }
     }
 
