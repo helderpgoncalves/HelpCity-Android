@@ -1,6 +1,6 @@
 package com.example.helpcity
 
-import OccurrenceAdapter
+import com.example.helpcity.adapters.OccurrenceAdapter
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -155,7 +155,7 @@ class OccurrenceActivity : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_note, menu)
+        menuInflater.inflate(R.menu.menu_occurrence, menu)
         return true
     }
 

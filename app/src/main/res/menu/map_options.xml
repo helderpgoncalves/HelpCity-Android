@@ -7,7 +7,6 @@
         android:icon="@drawable/ic_baseline_filter_list_24"
         android:title="TODO"
         app:showAsAction="ifRoom" />
-    <!-- TODO -->
     <item
         android:id="@+id/normal_map"
         android:title="@string/normal_map"

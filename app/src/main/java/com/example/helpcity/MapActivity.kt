@@ -4,8 +4,11 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.BitmapFactory
 import android.location.Location
+import android.os.Build
 import android.os.Bundle
+import android.os.StrictMode
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
@@ -31,6 +34,9 @@ import kotlinx.android.synthetic.main.activity_map.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.io.InputStream
+import java.lang.Exception
+import java.net.URL
 import kotlin.math.roundToInt
 
 
@@ -39,7 +45,6 @@ import kotlin.math.roundToInt
 class MapActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private lateinit var map: GoogleMap
-    private val TAG = MapActivity::class.java.simpleName
     private val REQUEST_LOCATION_PERMISSION = 1
     private lateinit var occurrences: List<Occurrence>
     private lateinit var markers: ArrayList<Marker>
@@ -104,7 +109,6 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
                 lastLocation = p0.lastLocation
                 val loc = LatLng(lastLocation.latitude, lastLocation.longitude)
                 map.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, 14.3f)) // Follow me option
-                // TODO
             }
         }
 
@@ -161,30 +165,47 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
 
                     occurrences = response.body()!!
 
+                    // https://stackoverflow.com/questions/6343166/how-to-fix-android-os-networkonmainthreadexception
+                    // android.os.NetworkOnMainThreadException
+                    val policy = StrictMode.ThreadPolicy.Builder().permitAll().build()
+                    StrictMode.setThreadPolicy(policy)
+
                     for (occurrence in occurrences) {
 
-                        /*
-                        TODO
-                        METER OS MARKERS COM IMAGEM
 
                         // Creates Bitmap objects from various sources, including files, streams, and byte-arrays.
                         // https://developer.android.com/reference/kotlin/android/graphics/BitmapFactory
+                            try {
+                                val urlImage =
+                                    "http://helpcity.000webhostapp.com/uploads/" + occurrence.image
+                                var input: InputStream = URL(urlImage).openStream()
+                                var bitmap = BitmapFactory.decodeStream(input)
+                                var icon: BitmapDescriptor =
+                                    BitmapDescriptorFactory.fromBitmap(bitmap)
 
-                        var imagemWeb =
-                            "https://helpcity.000webhostapp.com/uploads/" + occurrence.image
-                        var input: InputStream = URL(imagemWeb).openStream()
-                        var imagemFinalBitmap = BitmapFactory.decodeStream(input)
-                         */
+                                var position = LatLng(occurrence.lat.toDouble(), occurrence.lng.toDouble())
 
-                        var position = LatLng(occurrence.lat.toDouble(), occurrence.lng.toDouble())
+                                val marker: Marker = map.addMarker(
+                                    MarkerOptions().position(position).title(occurrence.type)
+                                        .snippet(occurrence.description).icon(icon)
+                                )
 
-                        val marker: Marker = map.addMarker(
-                            MarkerOptions().position(position).title(occurrence.type)
-                                .snippet(occurrence.description)
-                        )
+                                markers.add(marker) // Adiciona-mos ao nosso ArrayList para mais tarde conseguirmos mexer nela e fazer o que pretendemos
+                                markersTypeHashMap[marker] = occurrence.type
 
-                        markers.add(marker) // Adiciona-mos ao nosso ArrayList para mais tarde conseguirmos mexer nela e fazer o que pretendemos
-                        markersTypeHashMap[marker] = occurrence.type
+                            } catch (e: Exception) {
+                                Log.e("HELDER", e.toString())
+
+                                var position = LatLng(occurrence.lat.toDouble(), occurrence.lng.toDouble())
+
+                                val marker: Marker = map.addMarker(
+                                    MarkerOptions().position(position).title(occurrence.type)
+                                        .snippet(occurrence.description)
+                                )
+
+                                markers.add(marker) // Adiciona-mos ao nosso ArrayList para mais tarde conseguirmos mexer nela e fazer o que pretendemos
+                                markersTypeHashMap[marker] = occurrence.type
+                            }
                     }
                 } else {
                     markers.clear()

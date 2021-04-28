@@ -65,4 +65,7 @@
     <string name="my_occurrences">Minhas Ocorrências</string>
     <string name="occurrence_deleted">Ocorrência Apagada com Sucesso!</string>
     <string name="occurrences_not_found">Não foram encontradas Ocorrências</string>
+    <string name="occurrence_description">Descrição Ocorrência</string>
+    <string name="update_occurrence">Atualizar Detalhes</string>
+    <string name="update_image">Atualizar Imagem</string>
 </resources>

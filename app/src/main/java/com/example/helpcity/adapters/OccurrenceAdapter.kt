@@ -1,17 +1,22 @@
+package com.example.helpcity.adapters
+
 import android.content.Intent
 import android.os.StrictMode
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
-import com.example.helpcity.NewOccurrenceActivity
 import com.example.helpcity.OccurrenceActivity
+import com.example.helpcity.OccurrenceDescription
 import com.example.helpcity.R
 import com.example.helpcity.api.Occurrence
 import kotlinx.android.synthetic.main.recyclerview_occurrence.view.*
+import java.lang.Integer.parseInt
 
-const val OCCURRENCE_ID = "0"
+const val OCCURRENCE_ID = "id"
 
 class OccurrenceAdapter(
     val list: List<Occurrence>,
@@ -64,12 +69,14 @@ class OccurrenceViewHolder(itemView: View, noteInterface: OccurrenceActivity) :
     }
 
     init {
-        itemView.setOnClickListener {
-            val intent = Intent(it.context, NewOccurrenceActivity::class.java).apply {
-                putExtra(OCCURRENCE_ID, id.toString())
+        itemView.setOnClickListener {v : View ->
+            val intent = Intent(v.context, OccurrenceDescription::class.java).apply {
+                putExtra(OCCURRENCE_ID, parseInt(id.text.toString()))
             }
 
-            it.context.startActivity(intent)
+            Log.e("HELDER", id.text.toString())
+
+            v.context.startActivity(intent)
         }
     }
 }
