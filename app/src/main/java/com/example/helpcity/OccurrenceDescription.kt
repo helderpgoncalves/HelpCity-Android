@@ -166,7 +166,6 @@ class OccurrenceDescription : AppCompatActivity() {
         if (takePictureIntent.resolveActivity(this.packageManager) != null) {
             startActivityForResult(takePictureIntent, REQUEST_CODE)
         } else {
-            // TODO
             Toast.makeText(this, "Unable to open camera", Toast.LENGTH_LONG).show()
         }
     }

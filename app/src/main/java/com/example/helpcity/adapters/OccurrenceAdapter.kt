@@ -46,7 +46,6 @@ class OccurrenceAdapter(
 //Creates references to list element views that make up the each recycler view element
 class OccurrenceViewHolder(itemView: View, noteInterface: OccurrenceActivity) :
     RecyclerView.ViewHolder(itemView) {
-    // TODO  val image = itemView.....
     val type: TextView = itemView.occurrenceType
     val description = itemView.occurrenceDescription
 
@@ -61,10 +60,6 @@ class OccurrenceViewHolder(itemView: View, noteInterface: OccurrenceActivity) :
         type.text = occurrence.type
         description.text = occurrence.description
         id.text = occurrence.id
-    }
-
-    fun deleteById() {
-
     }
 
     init {
