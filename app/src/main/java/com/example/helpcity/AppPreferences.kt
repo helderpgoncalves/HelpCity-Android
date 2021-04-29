@@ -14,6 +14,8 @@ object AppPreferences {
     private val PASSWORD = Pair("password", "")
     private val USERNAME = Pair("username", "")
     private val ID = Pair("id", "")
+    private val TYPE_TO_SEARCH = Pair("type", "")
+    private val NOTIFICATIONS = Pair("notifications", false)
 
     fun init(context: Context) {
         preferences = context.getSharedPreferences(NAME, MODE)
@@ -56,4 +58,17 @@ object AppPreferences {
         set(value) = preferences.edit {
             it.putString(ID.first, value)
         }
+
+    var type: String
+        get() = preferences.getString(TYPE_TO_SEARCH.first, TYPE_TO_SEARCH.second) ?: ""
+        set(value) = preferences.edit {
+            it.putString(TYPE_TO_SEARCH.first, value)
+        }
+
+    var notifications: Boolean
+        get() = preferences.getBoolean(NOTIFICATIONS.first, NOTIFICATIONS.second)
+        set(value) = preferences.edit {
+            it.putBoolean(NOTIFICATIONS.first, value)
+        }
+
 }

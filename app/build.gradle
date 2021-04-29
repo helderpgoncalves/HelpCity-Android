@@ -50,6 +50,8 @@ dependencies {
     // Room components
     implementation "androidx.room:room-ktx:$rootProject.roomVersion"
     implementation 'androidx.annotation:annotation:1.1.0'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.preference:preference:1.1.1'
     kapt "androidx.room:room-compiler:$rootProject.roomVersion"
     androidTestImplementation "androidx.room:room-testing:$rootProject.roomVersion"
 
@@ -90,4 +92,8 @@ dependencies {
 
     //Spinner
     implementation "com.github.skydoves:powerspinner:1.1.7"
+
+    // Settings
+    def preference_version = "1.1.1"
+    implementation "androidx.preference:preference-ktx:$preference_version"
 }

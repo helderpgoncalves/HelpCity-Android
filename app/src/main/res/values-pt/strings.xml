@@ -70,4 +70,9 @@
     <string name="update_image">Atualizar Imagem</string>
     <string name="occurrence_updated_success">Ocorrência Atualizada com Sucesso</string>
     <string name="occurrence_updated_error">Erro ao atualizar Ocorrência</string>
+    <string name="title_activity_settings">Definições</string>
+    <string name="notifications">Notificações</string>
+    <string name="enable_notifications">Receber Mensagens de Notificações</string>
+    <string name="source_code">Código Fonte</string>
+    <string name="choose_occurrence_type_notifications">Escolha o tipo de ocorrências que pretende ser notificado</string>
 </resources>
