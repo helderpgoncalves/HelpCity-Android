@@ -24,6 +24,15 @@
         tools:targetApi="n">
 
         <activity
+            android:name=".OccurrenceDescription"
+            android:parentActivityName=".OccurrenceActivity"
+            android:theme="@style/Theme.HelpCity.NoActionBar" />
+
+        <activity
+            android:name=".OccurrenceActivity"
+            android:parentActivityName=".MapActivity"
+            android:theme="@style/Theme.HelpCity.NoActionBar" />
+        <activity
             android:name=".NewOccurrenceActivity"
             android:parentActivityName=".MapActivity"
             android:theme="@style/Theme.HelpCity.NoActionBar" />

@@ -49,7 +49,6 @@
     <string name="msg_loading">Loading...</string>
     <string name="buffering_string" translatable="false">Buffering&#8230;</string>
     <string name="toast_message" translatable="false">Playback completed.</string>
-    <string name="pick_image">Pick Image</string>
     <string name="upload_file">Upload file</string>
     <string name="toast_pick_file_error">Unable to pick file. Check status of file manager.</string>
     <string name="remove_or_change">Remove/Change Image</string>
@@ -67,4 +66,13 @@
     <string name="distance_from_you">Distance</string>
     <string name="range_of">Range of</string>
     <string name="meters">Meters</string>
+    <string name="my_occurrences">My Occurrences</string>
+    <string name="occurrence_deleted">Occurrence Deleted with Success</string>
+    <string name="occurrences_not_found">Occurrences Not Founded</string>
+    <string name="pick_image">Pick Image</string>
+    <string name="occurrence_description">Occurrence Description</string>
+    <string name="update_occurrence">Update Occurrence Details</string>
+    <string name="update_image">Update Image</string>
+    <string name="occurrence_updated_success">Occurrence Updated with Success</string>
+    <string name="occurrence_updated_error">Error updating Occurrence Details</string>
 </resources>

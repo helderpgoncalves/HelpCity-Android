@@ -62,4 +62,12 @@
     <string name="distance_from_you">Distância</string>
     <string name="range_of">Área de</string>
     <string name="meters">Metros</string>
+    <string name="my_occurrences">Minhas Ocorrências</string>
+    <string name="occurrence_deleted">Ocorrência Apagada com Sucesso!</string>
+    <string name="occurrences_not_found">Não foram encontradas Ocorrências</string>
+    <string name="occurrence_description">Descrição Ocorrência</string>
+    <string name="update_occurrence">Atualizar Detalhes</string>
+    <string name="update_image">Atualizar Imagem</string>
+    <string name="occurrence_updated_success">Ocorrência Atualizada com Sucesso</string>
+    <string name="occurrence_updated_error">Erro ao atualizar Ocorrência</string>
 </resources>
