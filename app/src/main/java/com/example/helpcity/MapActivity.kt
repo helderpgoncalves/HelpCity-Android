@@ -6,7 +6,6 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.BitmapFactory
 import android.location.Location
-import android.os.Build
 import android.os.Bundle
 import android.os.StrictMode
 import android.util.Log
@@ -35,7 +34,6 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.io.InputStream
-import java.lang.Exception
 import java.net.URL
 import kotlin.math.roundToInt
 
@@ -175,37 +173,39 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
 
                         // Creates Bitmap objects from various sources, including files, streams, and byte-arrays.
                         // https://developer.android.com/reference/kotlin/android/graphics/BitmapFactory
-                            try {
-                                val urlImage =
-                                    "http://helpcity.000webhostapp.com/uploads/" + occurrence.image
-                                var input: InputStream = URL(urlImage).openStream()
-                                var bitmap = BitmapFactory.decodeStream(input)
-                                var icon: BitmapDescriptor =
-                                    BitmapDescriptorFactory.fromBitmap(bitmap)
+                        try {
+                            val urlImage =
+                                "http://helpcity.000webhostapp.com/uploads/" + occurrence.image
+                            var input: InputStream = URL(urlImage).openStream()
+                            var bitmap = BitmapFactory.decodeStream(input)
+                            var icon: BitmapDescriptor =
+                                BitmapDescriptorFactory.fromBitmap(bitmap)
 
-                                var position = LatLng(occurrence.lat.toDouble(), occurrence.lng.toDouble())
+                            var position =
+                                LatLng(occurrence.lat.toDouble(), occurrence.lng.toDouble())
 
-                                val marker: Marker = map.addMarker(
-                                    MarkerOptions().position(position).title(occurrence.type)
-                                        .snippet(occurrence.description).icon(icon)
-                                )
+                            val marker: Marker = map.addMarker(
+                                MarkerOptions().position(position).title(occurrence.type)
+                                    .snippet(occurrence.description).icon(icon)
+                            )
 
-                                markers.add(marker) // Adiciona-mos ao nosso ArrayList para mais tarde conseguirmos mexer nela e fazer o que pretendemos
-                                markersTypeHashMap[marker] = occurrence.type
+                            markers.add(marker) // Adiciona-mos ao nosso ArrayList para mais tarde conseguirmos mexer nela e fazer o que pretendemos
+                            markersTypeHashMap[marker] = occurrence.type
 
-                            } catch (e: Exception) {
-                                Log.e("HELDER", e.toString())
+                        } catch (e: Exception) {
+                            Log.e("HELDER", e.toString())
 
-                                var position = LatLng(occurrence.lat.toDouble(), occurrence.lng.toDouble())
+                            var position =
+                                LatLng(occurrence.lat.toDouble(), occurrence.lng.toDouble())
 
-                                val marker: Marker = map.addMarker(
-                                    MarkerOptions().position(position).title(occurrence.type)
-                                        .snippet(occurrence.description)
-                                )
+                            val marker: Marker = map.addMarker(
+                                MarkerOptions().position(position).title(occurrence.type)
+                                    .snippet(occurrence.description)
+                            )
 
-                                markers.add(marker) // Adiciona-mos ao nosso ArrayList para mais tarde conseguirmos mexer nela e fazer o que pretendemos
-                                markersTypeHashMap[marker] = occurrence.type
-                            }
+                            markers.add(marker) // Adiciona-mos ao nosso ArrayList para mais tarde conseguirmos mexer nela e fazer o que pretendemos
+                            markersTypeHashMap[marker] = occurrence.type
+                        }
                     }
                 } else {
                     markers.clear()

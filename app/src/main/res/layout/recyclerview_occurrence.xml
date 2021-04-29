@@ -13,31 +13,31 @@
     android:paddingRight="16dp"
     android:paddingBottom="32dp">
 
-        <TextView
-            android:id="@+id/occurrenceType"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:maxLines="1"
-            android:textAppearance="@style/note_title"
-            android:textColor="@color/cor_laranja" />
+    <TextView
+        android:id="@+id/occurrenceType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxLines="1"
+        android:textAppearance="@style/note_title"
+        android:textColor="@color/cor_laranja" />
 
-        <TextView
-            android:id="@+id/occurrenceDescription"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/occurrenceType"
-            android:maxLines="3"
-            android:paddingTop="5dp"
-            android:textAppearance="@style/note_description"
-            android:textColor="@color/cor_laranja" />
+    <TextView
+        android:id="@+id/occurrenceDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/occurrenceType"
+        android:maxLines="3"
+        android:paddingTop="5dp"
+        android:textAppearance="@style/note_description"
+        android:textColor="@color/cor_laranja" />
 
-        <TextView
-            android:id="@+id/occurrenceId"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="0dp"
-            android:layout_toEndOf="@+id/occurrenceType"
-            android:textColor="@color/white"
-            android:visibility="invisible" />
+    <TextView
+        android:id="@+id/occurrenceId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="0dp"
+        android:layout_toEndOf="@+id/occurrenceType"
+        android:textColor="@color/white"
+        android:visibility="invisible" />
 
 </RelativeLayout>

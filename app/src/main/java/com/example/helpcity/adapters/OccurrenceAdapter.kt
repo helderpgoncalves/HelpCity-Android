@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.helpcity.OccurrenceActivity
 import com.example.helpcity.OccurrenceDescription
@@ -64,12 +63,12 @@ class OccurrenceViewHolder(itemView: View, noteInterface: OccurrenceActivity) :
         id.text = occurrence.id
     }
 
-    fun deleteById(){
+    fun deleteById() {
 
     }
 
     init {
-        itemView.setOnClickListener {v : View ->
+        itemView.setOnClickListener { v: View ->
             val intent = Intent(v.context, OccurrenceDescription::class.java).apply {
                 putExtra(OCCURRENCE_ID, parseInt(id.text.toString()))
             }

@@ -43,11 +43,8 @@ interface EndPoints {
         @Field("id") id: String,
         @Field("type") type: String,
         @Field("description") description: String,
-        @Field("image") image: String,
-        @Field("lat") lat: String,
-        @Field("lng") lng: String,
-        @Field("user_id") user_id: Int
-        ): Call<ServerResponse>
+        @Field("image") image: String
+    ): Call<ServerResponse>
 
     @FormUrlEncoded
     @POST("login")

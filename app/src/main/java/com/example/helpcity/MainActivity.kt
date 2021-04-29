@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         map_card_view.setOnClickListener {
-            if(AppPreferences.isLogin){
+            if (AppPreferences.isLogin) {
                 startActivity(Intent(this, MapActivity::class.java))
             } else {
                 Toast.makeText(this@MainActivity, R.string.loginToGoMap, Toast.LENGTH_SHORT).show()

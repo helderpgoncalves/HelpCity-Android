@@ -73,4 +73,6 @@
     <string name="occurrence_description">Occurrence Description</string>
     <string name="update_occurrence">Update Occurrence Details</string>
     <string name="update_image">Update Image</string>
+    <string name="occurrence_updated_success">Occurrence Updated with Success</string>
+    <string name="occurrence_updated_error">Error updating Occurrence Details</string>
 </resources>

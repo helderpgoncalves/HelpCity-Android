@@ -68,4 +68,6 @@
     <string name="occurrence_description">Descrição Ocorrência</string>
     <string name="update_occurrence">Atualizar Detalhes</string>
     <string name="update_image">Atualizar Imagem</string>
+    <string name="occurrence_updated_success">Ocorrência Atualizada com Sucesso</string>
+    <string name="occurrence_updated_error">Erro ao atualizar Ocorrência</string>
 </resources>

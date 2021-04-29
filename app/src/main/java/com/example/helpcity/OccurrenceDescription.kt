@@ -98,13 +98,11 @@ class OccurrenceDescription : AppCompatActivity() {
             val finalImage: String = Base64.getEncoder().encodeToString(stream.toByteArray())
 
             val request = ServiceBuilder.buildService(EndPoints::class.java)
-            val call = request.updateOccurrence(id,
+            val call = request.updateOccurrence(
+                id,
                 type,
                 description,
-                finalImage,
-                lat,
-                lng,
-                userId
+                finalImage
             )
 
             call.enqueue(object : Callback<ServerResponse> {
@@ -114,21 +112,20 @@ class OccurrenceDescription : AppCompatActivity() {
                 ) {
                     if (response.isSuccessful) {
                         val insertResult = response.body()!!
-
-                                // TODO STRING TOAST
                         if (insertResult.status) {
                             Toast.makeText(
                                 this@OccurrenceDescription,
-                                R.string.occurrence_create_success,
+                                R.string.occurrence_updated_success,
                                 Toast.LENGTH_LONG
                             ).show()
 
-                            val intent = Intent(this@OccurrenceDescription, OccurrenceActivity::class.java)
+                            val intent =
+                                Intent(this@OccurrenceDescription, OccurrenceActivity::class.java)
                             startActivity(intent)
                         } else {
                             Toast.makeText(
                                 this@OccurrenceDescription,
-                                R.string.occurrence_create_error,
+                                R.string.occurrence_updated_error,
                                 Toast.LENGTH_LONG
                             ).show()
                         }

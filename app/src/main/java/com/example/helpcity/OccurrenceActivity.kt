@@ -1,6 +1,5 @@
 package com.example.helpcity
 
-import com.example.helpcity.adapters.OccurrenceAdapter
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -10,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.helpcity.adapters.OccurrenceAdapter
 import com.example.helpcity.api.EndPoints
 import com.example.helpcity.api.Occurrence
 import com.example.helpcity.api.ServerResponse
@@ -104,8 +104,13 @@ class OccurrenceActivity : AppCompatActivity() {
                     }
                 }
             }
+
             override fun onFailure(call: Call<List<Occurrence>>, t: Throwable) {
-                Toast.makeText(this@OccurrenceActivity, R.string.occurrences_not_found, Toast.LENGTH_LONG).show()
+                Toast.makeText(
+                    this@OccurrenceActivity,
+                    R.string.occurrences_not_found,
+                    Toast.LENGTH_LONG
+                ).show()
             }
         })
     }
