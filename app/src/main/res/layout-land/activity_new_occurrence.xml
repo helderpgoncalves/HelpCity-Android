@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/preto_background"
+    tools:context=".NewOccurrenceActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/new_occurrence_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/cor_laranja"
+        android:minHeight="?attr/actionBarSize"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:title="@string/new_occurrence"
+        app:titleTextColor="@color/white" />
+
+    <ImageView
+        android:id="@+id/preview"
+        android:layout_width="256dp"
+        android:layout_height="247dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="16dp"
+        android:background="@color/cinza_escuro"
+        android:padding="10dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_baseline_image_24"
+        app:layout_constraintEnd_toStartOf="@+id/new_occurrence_description_label"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/new_occurrence_toolbar" />
+
+    <Button
+        android:id="@+id/pickImage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="300dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="16dp"
+        android:background="@color/cor_do_logo"
+        android:drawableEnd="@drawable/ic_baseline_file_upload_24"
+        android:text="@string/pick_image"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/preview"
+        app:layout_constraintTop_toBottomOf="@+id/new_occurrence_toolbar" />
+
+    <com.skydoves.powerspinner.PowerSpinnerView
+        android:id="@+id/spinnerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="300dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@color/cor_do_logo"
+        android:hint="@string/type"
+        android:padding="10dp"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:textSize="14.5sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/pickImage"
+        app:layout_constraintTop_toBottomOf="@id/pickImage"
+        app:spinner_arrow_gravity="end"
+        app:spinner_arrow_tint="@color/cor_laranja"
+        app:spinner_divider_color="@color/cor_laranja"
+        app:spinner_divider_show="true"
+        app:spinner_divider_size="0.4dp"
+        app:spinner_item_array="@array/Types"
+        app:spinner_popup_animation="bounce"
+        tools:ignore="MissingConstraints" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/new_occurrence_description_label"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="300dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:hint="@string/description"
+        android:inputType="textMultiLine"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerView">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/new_occurrence_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/new_occurrence_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="300dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@color/cor_do_logo"
+        android:text="@string/add_occurrence"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/new_occurrence_description_label" />
+</androidx.constraintlayout.widget.ConstraintLayout>
