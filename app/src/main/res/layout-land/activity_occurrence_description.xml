@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/preto_background"
+    tools:context=".OccurrenceDescription">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/occurrenceDescriptionToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/cor_laranja"
+        android:minHeight="?attr/actionBarSize"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:title="@string/occurrence_description"
+        app:titleTextColor="@color/white" />
+
+    <ImageView
+        android:id="@+id/_occurrence_image"
+        android:layout_width="279dp"
+        android:layout_height="198dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="12dp"
+        android:background="@color/cinza_escuro"
+        android:padding="100dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_baseline_image_24"
+        app:layout_constraintBottom_toTopOf="@+id/_occurrence_description"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.025"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/occurrenceDescriptionToolbar" />
+
+    <Button
+        android:id="@+id/pickImage_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="300dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="16dp"
+        android:background="@color/cor_do_logo"
+        android:drawableEnd="@drawable/ic_baseline_file_upload_24"
+        android:text="@string/update_image"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/occurrenceDescriptionToolbar" />
+
+    <com.skydoves.powerspinner.PowerSpinnerView
+        android:id="@+id/_occurrence_type"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="300dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="16dp"
+        android:background="@color/cor_do_logo"
+        android:hint="@string/type"
+        android:padding="10dp"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:textSize="14.5sp"
+        app:layout_constraintEnd_toEndOf="@+id/pickImage_button"
+        app:layout_constraintStart_toStartOf="@+id/pickImage_button"
+        app:layout_constraintTop_toBottomOf="@+id/pickImage_button"
+        app:spinner_arrow_gravity="end"
+        app:spinner_arrow_tint="@color/cor_laranja"
+        app:spinner_divider_color="@color/cor_laranja"
+        app:spinner_divider_show="true"
+        app:spinner_divider_size="0.4dp"
+        app:spinner_item_array="@array/Types"
+        app:spinner_popup_animation="bounce"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/_occurrence_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="16dp"
+        android:background="@color/white"
+        android:clickable="true"
+        android:editable="true"
+        android:enabled="true"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:hint="@string/description"
+        android:lines="2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/longitude" />
+
+    <TextView
+        android:id="@+id/latitude"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="300dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="16dp"
+        android:background="@color/white"
+        android:editable="false"
+        android:lines="2"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="@+id/_occurrence_type"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/_occurrence_type" />
+
+    <TextView
+        android:id="@+id/longitude"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="300dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="16dp"
+        android:background="@color/white"
+        android:editable="false"
+        android:lines="2"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="@+id/latitude"
+        app:layout_constraintStart_toStartOf="@+id/latitude"
+        app:layout_constraintTop_toBottomOf="@+id/latitude" />
+
+    <Button
+        android:id="@+id/_update_occurrence_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="16dp"
+        android:background="@color/cor_do_logo"
+        android:text="@string/update_occurrence"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/_occurrence_description" />
+</androidx.constraintlayout.widget.ConstraintLayout>
