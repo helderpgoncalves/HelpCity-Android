@@ -80,5 +80,4 @@
     <string name="enable_notifications">Enable alert notifications</string>
     <string name="choose_occurrence_type_notifications">Occurrences type to be notified</string>
     <string name="source_code">Source Code</string>
-
 </resources>

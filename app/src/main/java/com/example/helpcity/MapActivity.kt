@@ -37,11 +37,9 @@ import java.io.InputStream
 import java.net.URL
 import kotlin.math.roundToInt
 
-
-//This class allows you to interact with the map by adding markers, styling its appearance and
-// displaying the user's location.
 class MapActivity : AppCompatActivity(), OnMapReadyCallback {
 
+    //
     private lateinit var map: GoogleMap
     private val REQUEST_LOCATION_PERMISSION = 1
     private lateinit var occurrences: List<Occurrence>
@@ -126,7 +124,6 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
         // update location
         createLocationRequest()
 
-
         getAllOccurrences()
 
         // Ir para a Atividade de Criar novas Ocorrencias
@@ -143,6 +140,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
             val i = Intent(this, OccurrenceActivity::class.java)
             startActivity(i)
         }
+
     }
 
     private fun getAllOccurrences() {
@@ -220,7 +218,6 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
 
     override fun onMapReady(googleMap: GoogleMap) {
         map = googleMap
-
         enableMyLocation()
     }
 
