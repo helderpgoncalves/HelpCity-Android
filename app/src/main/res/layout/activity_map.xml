@@ -61,13 +61,13 @@
         android:layout_marginStart="30dp"
         android:layout_marginEnd="100dp"
         android:layout_marginBottom="20dp"
-        app:thumbColor="@color/cor_laranja"
-        app:tickColor="@color/cinza_escuro"
         android:value="800.0"
         android:valueFrom="100"
         android:valueTo="1500"
         app:layout_constraintBottom_toBottomOf="@+id/map"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:thumbColor="@color/cor_laranja"
+        app:tickColor="@color/cinza_escuro" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
