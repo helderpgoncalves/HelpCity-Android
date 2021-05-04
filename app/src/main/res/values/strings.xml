@@ -80,4 +80,15 @@
     <string name="enable_notifications">Enable alert notifications</string>
     <string name="choose_occurrence_type_notifications">Occurrences type to be notified</string>
     <string name="source_code">Source Code</string>
+
+    <!--Notification Strings-->
+    <string name="channel_name">Be careful!</string>
+    <string name="content_text">You just entered in an area where multiple reports have been created.</string>
+    <string name="notification_channel_description">Cityhelper status notification</string>
+    <string name="summary">summary</string>
+
+    <!--Strings for geofence-->
+    <string name="geofence_not_available">It wasn\'t possible to select a warning area.</string>
+    <string name="geofence_too_many">Too many warning areas.</string>
+    <string name="geofence_pending">Too many requests for warning area.</string>
 </resources>

@@ -3,10 +3,13 @@ package com.example.helpcity
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.PreferenceManager
+import androidx.preference.SwitchPreference
+
 
 class SettingsActivity : AppCompatActivity() {
 
@@ -26,12 +29,12 @@ class SettingsActivity : AppCompatActivity() {
         override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
             setPreferencesFromResource(R.xml.root_preferences, rootKey)
 
+            val notifications: SwitchPreference? = findPreference(
+                this.resources
+                    .getString(R.string.notifications)
+            ) as SwitchPreference?
 
-            //Notifications
-            var notifications = PreferenceManager.getDefaultSharedPreferences(context).getBoolean(
-                "notifications",
-                false
-            )
+            Toast.makeText(context, notifications.toString(), Toast.LENGTH_LONG).show()
 
             var chooseType = PreferenceManager.getDefaultSharedPreferences(context).getString(
                 "list_preference",
@@ -39,7 +42,6 @@ class SettingsActivity : AppCompatActivity() {
             )
 
             AppPreferences.type = chooseType.toString()
-            AppPreferences.notifications = notifications
 
             // Github
             val github: Preference? = findPreference("webpage")

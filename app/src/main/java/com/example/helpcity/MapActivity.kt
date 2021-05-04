@@ -2,10 +2,13 @@ package com.example.helpcity
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.annotation.TargetApi
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.BitmapFactory
+import android.graphics.Color
 import android.location.Location
+import android.os.Build
 import android.os.Bundle
 import android.os.StrictMode
 import android.util.Log
@@ -15,6 +18,7 @@ import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -22,6 +26,7 @@ import androidx.core.content.ContextCompat
 import com.example.helpcity.api.EndPoints
 import com.example.helpcity.api.Occurrence
 import com.example.helpcity.api.ServiceBuilder
+import com.example.helpcity.geofence.GeofenceHelper
 import com.google.android.gms.location.*
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -37,13 +42,22 @@ import java.io.InputStream
 import java.net.URL
 import kotlin.math.roundToInt
 
-class MapActivity : AppCompatActivity(), OnMapReadyCallback {
+const val LOCATION_PERMISSION_REQUEST_CODE = 1000
+const val FINE_LOCATION_ACCESS_REQUEST_CODE = 10002
+const val REQUEST_FOREGROUND_AND_BACKGROUND_PERMISSION_RESULT_CODE = 33
+const val GEOFENCE_RADIUS = 200f
+const val GEOFENCE_ID = "SOME_GEOFENCE_ID"
 
-    //
+class MapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMapLongClickListener {
+
     private lateinit var map: GoogleMap
     private val REQUEST_LOCATION_PERMISSION = 1
     private lateinit var occurrences: List<Occurrence>
     private lateinit var markers: ArrayList<Marker>
+
+    //Geofencing
+    private lateinit var geofencingClient: GeofencingClient
+    private lateinit var geoFenceHelper: GeofenceHelper
 
     // HashMap para Ligar cada Marker ao seu Type de modo a ser mais fácil filtrar
     private lateinit var markersTypeHashMap: HashMap<Marker, String>
@@ -94,9 +108,15 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
-
         // initialize the fusedLocationClient
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+        // update location
+        createLocationRequest()
+
+        // Geofecing
+        geofencingClient = LocationServices.getGeofencingClient(this)
+        geoFenceHelper = GeofenceHelper(this)
+
 
         // location periodic updates
         locationCallback = object : LocationCallback() {
@@ -121,9 +141,6 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
                 .plus(nomeMetros)
         }
 
-        // update location
-        createLocationRequest()
-
         getAllOccurrences()
 
         // Ir para a Atividade de Criar novas Ocorrencias
@@ -140,7 +157,22 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
             val i = Intent(this, OccurrenceActivity::class.java)
             startActivity(i)
         }
+    }
 
+    @TargetApi(29)
+    private fun requestForegroundAndBackgroundLocationPermissions() {
+        if (ActivityCompat.checkSelfPermission(
+                this,
+                android.Manifest.permission.ACCESS_BACKGROUND_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(android.Manifest.permission.ACCESS_BACKGROUND_LOCATION),
+                REQUEST_FOREGROUND_AND_BACKGROUND_PERMISSION_RESULT_CODE
+            )
+            return
+        }
     }
 
     private fun getAllOccurrences() {
@@ -216,28 +248,38 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
         })
     }
 
+    @RequiresApi(Build.VERSION_CODES.Q)
     override fun onMapReady(googleMap: GoogleMap) {
         map = googleMap
         enableMyLocation()
-    }
-
-    private fun isPermissionGranted(): Boolean {
-        return ContextCompat.checkSelfPermission(
-            this,
-            Manifest.permission.ACCESS_FINE_LOCATION
-        ) == PackageManager.PERMISSION_GRANTED
+        requestForegroundAndBackgroundLocationPermissions()
+        map.setOnMapLongClickListener(this)
     }
 
     @SuppressLint("MissingPermission")
     private fun enableMyLocation() {
-        if (isPermissionGranted()) {
-            map.isMyLocationEnabled = true
-        } else {
+        if (ActivityCompat.checkSelfPermission(
+                this,
+                android.Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
             ActivityCompat.requestPermissions(
                 this,
-                arrayOf<String>(Manifest.permission.ACCESS_FINE_LOCATION),
-                REQUEST_LOCATION_PERMISSION
+                arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
+                LOCATION_PERMISSION_REQUEST_CODE
             )
+
+            return
+        } else {
+            map.isMyLocationEnabled = true
+
+            fusedLocationClient.lastLocation.addOnSuccessListener(this) { location ->
+                if (location != null) {
+                    lastLocation = location
+                    val currentLatLng = LatLng(location.latitude, location.longitude)
+                    map.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 12f))
+                }
+            }
         }
     }
 
@@ -285,7 +327,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private fun createLocationRequest() {
         locationRequest = LocationRequest()
-        locationRequest.interval = 1000 // update a cada 1 segundo
+        locationRequest.interval = 3000 // update a cada 1 segundo
         locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
     }
 
@@ -306,14 +348,13 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
     private fun startLocationUpdates() {
         if (ActivityCompat.checkSelfPermission(
                 this,
-                Manifest.permission.ACCESS_FINE_LOCATION
+                android.Manifest.permission.ACCESS_FINE_LOCATION
             ) != PackageManager.PERMISSION_GRANTED
         ) {
-
             ActivityCompat.requestPermissions(
                 this,
-                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
-                REQUEST_LOCATION_PERMISSION
+                arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
+                LOCATION_PERMISSION_REQUEST_CODE
             )
             return
         }
@@ -431,5 +472,74 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
         for (marker in markers) {
             marker.isVisible = true
         }
+    }
+
+    override fun onMapLongClick(position: LatLng?) {
+        if (Build.VERSION.SDK_INT >= 29) {
+            //Background Permission
+            if (ContextCompat.checkSelfPermission(
+                    this,
+                    android.Manifest.permission.ACCESS_BACKGROUND_LOCATION
+                ) == PackageManager.PERMISSION_GRANTED
+            ) {
+                handleMapLong(position)
+            } else {
+                if (ActivityCompat.shouldShowRequestPermissionRationale(
+                        this,
+                        android.Manifest.permission.ACCESS_BACKGROUND_LOCATION
+                    )
+                ) {
+                    ActivityCompat.requestPermissions(
+                        this,
+                        arrayOf(android.Manifest.permission.ACCESS_BACKGROUND_LOCATION),
+                        FINE_LOCATION_ACCESS_REQUEST_CODE
+                    )
+                } else {
+                    ActivityCompat.requestPermissions(
+                        this,
+                        arrayOf(android.Manifest.permission.ACCESS_BACKGROUND_LOCATION),
+                        FINE_LOCATION_ACCESS_REQUEST_CODE
+                    )
+                }
+            }
+        } else {
+            handleMapLong(position)
+        }
+    }
+
+    private fun handleMapLong(position: LatLng?) {
+        addAreaGeofence(position!!, GEOFENCE_RADIUS.toDouble())
+        addGeofence(position, GEOFENCE_RADIUS)
+    }
+
+    private fun addGeofence(latlng: LatLng, radius: Float) {
+        val geofence = geoFenceHelper.getGeofence(
+            GEOFENCE_ID,
+            latlng,
+            radius,
+            Geofence.GEOFENCE_TRANSITION_ENTER
+        )
+        val geofencingRequest = geoFenceHelper.getGeofencingRequest(geofence)
+        val pendingIntent = geoFenceHelper.getPendingIntent()
+        if (ActivityCompat.checkSelfPermission(
+                this,
+                android.Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            return
+        }
+        geofencingClient.addGeofences(geofencingRequest, pendingIntent).addOnSuccessListener { }
+            .addOnFailureListener { p0 -> val errorMessage = geoFenceHelper.getErrorString(p0) }
+    }
+
+    private fun addAreaGeofence(center: LatLng, radius: Double) {
+        var areaOption: CircleOptions = CircleOptions()
+        areaOption.center(center)
+        areaOption.radius(radius)
+        areaOption.strokeColor(Color.argb(255, 255, 0, 0))
+        areaOption.fillColor(Color.argb(64, 255, 0, 0))
+        areaOption.strokeWidth(4f)
+        map.addCircle(areaOption)
+
     }
 }
