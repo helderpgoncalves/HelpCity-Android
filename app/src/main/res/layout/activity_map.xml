@@ -13,6 +13,30 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
+    <TextView
+        android:id="@+id/orientation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="5dp"
+        android:text="12"
+        app:layout_constraintEnd_toEndOf="@+id/compass"
+        app:layout_constraintStart_toStartOf="@+id/compass"
+        app:layout_constraintTop_toBottomOf="@+id/compass" />
+
+    <ImageView
+        android:id="@+id/compass"
+        android:layout_width="106dp"
+        android:layout_height="92dp"
+        android:layout_below="@id/orientation"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="28dp"
+        android:src="@drawable/compass"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.052"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/map" />
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/_occurrenceFab"
         android:layout_width="wrap_content"

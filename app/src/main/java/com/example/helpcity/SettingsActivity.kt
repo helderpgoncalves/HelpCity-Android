@@ -1,14 +1,11 @@
 package com.example.helpcity
 
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.preference.Preference
-import androidx.preference.PreferenceFragmentCompat
-import androidx.preference.PreferenceManager
-import androidx.preference.SwitchPreference
+import com.google.android.material.slider.Slider
+import kotlinx.android.synthetic.main.activity_map.*
+import kotlinx.android.synthetic.main.settings_activity.*
+import kotlin.math.roundToInt
 
 
 class SettingsActivity : AppCompatActivity() {
@@ -16,38 +13,31 @@ class SettingsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.settings_activity)
-        if (savedInstanceState == null) {
-            supportFragmentManager
-                .beginTransaction()
-                .replace(R.id.settings, SettingsFragment())
-                .commit()
+
+        setSupportActionBar(findViewById(R.id.settingsListToolbar))
+        supportActionBar?.apply {
+            setDisplayHomeAsUpEnabled(true)
+            setDisplayShowHomeEnabled(true)
+            setDisplayShowTitleEnabled(true)
         }
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-    }
 
-    class SettingsFragment : PreferenceFragmentCompat() {
-        override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
-            setPreferencesFromResource(R.xml.root_preferences, rootKey)
+        switchNotification.isChecked = AppPreferences.notifications
+        geofence_radius.value = AppPreferences.radius
 
-            val notifications: SwitchPreference? = findPreference(
-                this.resources
-                    .getString(R.string.notifications)
-            ) as SwitchPreference?
-
-            Toast.makeText(context, notifications.toString(), Toast.LENGTH_LONG).show()
-
-            var chooseType = PreferenceManager.getDefaultSharedPreferences(context).getString(
-                "list_preference",
-                "All"
-            )
-
-            AppPreferences.type = chooseType.toString()
-
-            // Github
-            val github: Preference? = findPreference("webpage")
-            val intent = Intent(Intent.ACTION_VIEW)
-            intent.data = Uri.parse("https://github.com/helderpgoncalves/HelpCity")
-            github!!.intent = intent
+        geofence_radius.setLabelFormatter { value: Float ->
+            val nomeAntesDoSlider = resources.getString(R.string.range_of)
+            val nomeMetros = resources.getString(R.string.meters)
+            return@setLabelFormatter nomeAntesDoSlider.plus(" ${value.roundToInt()} ")
+                .plus(nomeMetros)
         }
+
+        geofence_radius.addOnChangeListener(Slider.OnChangeListener { slider, _, _ ->
+            AppPreferences.radius = slider.value
+        })
+
+        switchNotification.setOnCheckedChangeListener { _, isChecked ->
+            AppPreferences.notifications = isChecked
+        }
+
     }
 }

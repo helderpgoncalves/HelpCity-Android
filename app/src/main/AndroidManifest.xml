@@ -27,10 +27,11 @@
             android:name=".geofence.GeofenceBroadcastReceiver"
             android:enabled="true"
             android:exported="true" />
+
         <activity
             android:name=".SettingsActivity"
-            android:label="@string/title_activity_settings"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/Theme.HelpCity.NoActionBar" />
         <activity
             android:name=".OccurrenceDescription"
             android:parentActivityName=".OccurrenceActivity"

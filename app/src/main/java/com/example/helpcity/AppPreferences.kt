@@ -16,6 +16,7 @@ object AppPreferences {
     private val ID = Pair("id", "")
     private val TYPE_TO_SEARCH = Pair("type", "")
     private val NOTIFICATIONS = Pair("notifications", false)
+    private val RADIUS = Pair("radius", 200f)
 
     fun init(context: Context) {
         preferences = context.getSharedPreferences(NAME, MODE)
@@ -39,6 +40,12 @@ object AppPreferences {
         get() = preferences.getString(EMAIL.first, EMAIL.second) ?: ""
         set(value) = preferences.edit {
             it.putString(EMAIL.first, value)
+        }
+
+    var radius: Float
+        get() = preferences.getFloat(RADIUS.first, RADIUS.second)
+        set(value) = preferences.edit {
+            it.putFloat(RADIUS.first, value)
         }
 
     var password: String
