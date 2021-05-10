@@ -1,0 +1,72 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/preto_background"
+    tools:context=".SettingsActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/settingsListToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/cinza_escuro"
+        android:backgroundTint="@color/cor_laranja"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:title="@string/settings"
+        app:titleTextColor="@color/white" />
+
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/switchNotification"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="565dp"
+        android:background="@color/cor_do_logo"
+        android:padding="30dp"
+        android:text="@string/notifications"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/settingsListToolbar"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@id/settingsListToolbar"
+        app:layout_constraintTop_toBottomOf="@+id/settingsListToolbar" />
+
+    <TextView
+        android:id="@+id/geofence_radius_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="150dp"
+        android:text="@string/geofence_range"
+        android:textColor="@color/white"
+        android:textSize="32dp"
+        app:layout_constraintEnd_toEndOf="@+id/switchNotification"
+        app:layout_constraintStart_toStartOf="@+id/switchNotification"
+        app:layout_constraintTop_toBottomOf="@+id/switchNotification" />
+
+    <com.google.android.material.slider.Slider
+        android:id="@+id/geofence_radius"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        android:value="225"
+        android:valueFrom="50"
+        android:valueTo="400"
+        app:layout_constraintEnd_toEndOf="@+id/geofence_radius_label"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/geofence_radius_label"
+        app:layout_constraintTop_toBottomOf="@+id/geofence_radius_label"
+        app:thumbColor="@color/cor_laranja"
+        app:tickColor="@color/white"
+        app:trackColor="@color/white" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -28,6 +28,10 @@ class MainActivity : AppCompatActivity() {
         profile_card_view.setOnClickListener {
             startActivity(Intent(this, LoginActivity::class.java))
         }
+
+        settings_card_view.setOnClickListener {
+            startActivity(Intent(this, SettingsActivity::class.java))
+        }
     }
 
     private fun setupLoginOrLogoutButton() {

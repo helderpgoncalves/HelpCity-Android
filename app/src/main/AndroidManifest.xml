@@ -4,6 +4,7 @@
     package="com.example.helpcity">
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -22,12 +23,19 @@
         android:theme="@style/Theme.HelpCity"
         android:usesCleartextTraffic="true"
         tools:targetApi="n">
+        <receiver
+            android:name=".geofence.GeofenceBroadcastReceiver"
+            android:enabled="true"
+            android:exported="true" />
 
+        <activity
+            android:name=".SettingsActivity"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/Theme.HelpCity.NoActionBar" />
         <activity
             android:name=".OccurrenceDescription"
             android:parentActivityName=".OccurrenceActivity"
             android:theme="@style/Theme.HelpCity.NoActionBar" />
-
         <activity
             android:name=".OccurrenceActivity"
             android:parentActivityName=".MapActivity"
@@ -43,7 +51,7 @@
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="@string/google_maps_key" />
+            android:value="AIzaSyBt00vmDQNGMe8G2eIrXEAIXjc-iSkixuM" />
 
         <activity
             android:name=".MapActivity"
