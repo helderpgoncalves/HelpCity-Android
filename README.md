@@ -11,9 +11,30 @@
 
 </div>
 
+## About HelpCity
+
+## Screenshots
+<div align="center">
+  
+<a><img src="https://github.com/helderpgoncalves/HelpCity/blob/master/app/src/main/res/drawable/screenshot_1.png" alt="RemoteSports" width="200"></a> 
+<a><img src="https://github.com/helderpgoncalves/HelpCity/blob/master/app/src/main/res/drawable/screenshot_2.png" alt="RemoteSports" width="200"></a>
+<a><img src="https://github.com/helderpgoncalves/HelpCity/blob/master/app/src/main/res/drawable/screenshot_3.png" alt="RemoteSports" width="200"></a>
+<a><img src="https://github.com/helderpgoncalves/HelpCity/blob/master/app/src/main/res/drawable/screenshot_4.png" alt="RemoteSports" width="200"></a>
+<a><img src="https://github.com/helderpgoncalves/HelpCity/blob/master/app/src/main/res/drawable/screenshot_5.png" alt="RemoteSports" width="200"></a>
+<a><img src="https://github.com/helderpgoncalves/HelpCity/blob/master/app/src/main/res/drawable/screenshot_6.png" alt="RemoteSports" width="200"></a>
+<a><img src="https://github.com/helderpgoncalves/HelpCity/blob/master/app/src/main/res/drawable/screenshot_7.png" alt="RemoteSports" width="200"></a>
+<a><img src="https://github.com/helderpgoncalves/HelpCity/blob/master/app/src/main/res/drawable/screenshot_8.png" alt="RemoteSports" width="200"></a>
+</div>
+
+
+
 ## Built with
 
 - [Kotlin](https://kotlinlang.org/)
+- [Android Studio](https://developer.android.com/studio)
+- [PHP](https://www.php.net/)
+- [Composer](https://getcomposer.org/)
+- [Slim Framework](https://www.slimframework.com/)
 
 ## Team
 
