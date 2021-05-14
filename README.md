@@ -14,14 +14,7 @@
 ## About HelpCity
 
 
-Develop an app that can be accessed by a citizen in order to report situations that they detect
-in the city and that you think should be reported to the municipality (displaced sanitation cover, a hole in the
-middle of the road, etc.). The information must therefore be stored on a remote database. The user must have the
-possibility to send this information with a textual description and also taking a photo associating
-automatically to the user's location. You should also be able to consult all the information that
-several citizens reported in the city, through their visualization on a map with the possibility of seeing
-details when pressing at each marked location. Finally, you can also save your own notes only
-for him (eg, not walking down that street, etc.), in a local way to your cell phone.
+HelpCity is an app that can be accessed by a citizen in order to report situations that they detect in the city and that you think should be reported to the municipality (displaced sanitation cover, a hole in the middle of the road, etc.). The information must therefore be stored on a remote database. The user must have the possibility to send this information with a textual description and also taking a photo associating automatically to the user's location. You should also be able to consult all the information that several citizens reported in the city, through their visualization on a map with the possibility of seeing details when pressing at each marked location. Finally, you can also save your own notes only for him (eg, not walking down that street, etc.), in a local way to your cell phone.
 
 ## Screenshots
 <div align="center">
